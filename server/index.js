@@ -16,14 +16,21 @@ const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const db_1 = __importDefault(require("./db"));
 const cors_1 = __importDefault(require("cors"));
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
+const indexRouter_1 = __importDefault(require("./routes/indexRouter"));
+const ErrorHandlingMiddleware_1 = __importDefault(require("./middleware/ErrorHandlingMiddleware"));
+const path_1 = __importDefault(require("path"));
 dotenv_1.default.config();
 const PORT = process.env.PORT || 5000;
+//Middleware
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-app.get('/', (req, res) => {
-    res.status(200).json({ message: 'WORKING' });
-});
+app.use(express_1.default.static(path_1.default.resolve(__dirname, "static")));
+app.use((0, express_fileupload_1.default)({}));
+app.use('/api', indexRouter_1.default);
+//LAST middleware
+app.use(ErrorHandlingMiddleware_1.default);
 const start = function start() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -38,6 +45,3 @@ const start = function start() {
     });
 };
 start();
-app.get('/', (req, res) => {
-    res.send('Express + TypeScript Server');
-});

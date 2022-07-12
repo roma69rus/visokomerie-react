@@ -17,12 +17,12 @@ const ProductOptions = sequilize.define("product_options", {
   product_color: {type: DataTypes.STRING, allowNull: false},
   price_increase: {type: DataTypes.INTEGER, allowNull: false, defaultValue: "0"},
   po_order: {type: DataTypes.INTEGER},
-  options_slug: {type: DataTypes.STRING(15), unique: true},
+  options_slug: {type: DataTypes.STRING(15), unique: true, allowNull: false},
 })
 
 const ProductOptionsImage = sequilize.define("product_options_image", {
   id: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
-  img_path: {type: DataTypes.TEXT},
+  img_path: {type: DataTypes.TEXT, allowNull: false},
   main_image: {type: DataTypes.BOOLEAN, defaultValue: "false"},
 })
 

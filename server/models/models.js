@@ -20,11 +20,11 @@ const ProductOptions = db_1.default.define("product_options", {
     product_color: { type: sequelize_1.DataTypes.STRING, allowNull: false },
     price_increase: { type: sequelize_1.DataTypes.INTEGER, allowNull: false, defaultValue: "0" },
     po_order: { type: sequelize_1.DataTypes.INTEGER },
-    options_slug: { type: sequelize_1.DataTypes.STRING(15), unique: true },
+    options_slug: { type: sequelize_1.DataTypes.STRING(15), unique: true, allowNull: false },
 });
 const ProductOptionsImage = db_1.default.define("product_options_image", {
     id: { type: sequelize_1.DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    img_path: { type: sequelize_1.DataTypes.TEXT },
+    img_path: { type: sequelize_1.DataTypes.TEXT, allowNull: false },
     main_image: { type: sequelize_1.DataTypes.BOOLEAN, defaultValue: "false" },
 });
 const ProductCategory = db_1.default.define("product_category", {
