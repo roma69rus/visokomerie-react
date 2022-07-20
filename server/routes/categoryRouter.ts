@@ -1,9 +1,10 @@
 import { Router } from "express";
 import categoryController from "../controllers/categoryController";
+import checkRole from "../middleware/checkRoleMiddleware"
 
 const router = Router(); 
 
-router.post('/', categoryController.create)
+router.post('/', checkRole('ADMIN'), categoryController.create)
 router.get('/', categoryController.getAll)
 
 

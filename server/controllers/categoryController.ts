@@ -1,7 +1,8 @@
-import { Request, Response } from 'express';
-import models from '../models/models'
+import { Request, Response, NextFunction} from 'express';
+import {Category} from '../models/product_category'
 import ApiError from '../error/ApiError';
-import { Json } from 'sequelize/types/utils';
+import categoryService from '../services/categoryService';
+
 
 class CategoryController {
   
@@ -9,15 +10,26 @@ class CategoryController {
 
   }
   
-  async create(req:Request, res:Response): Promise<any> {
-    const {name} = req.body
-    const category = await models.ProductCategory.create({name})
-    return res.json(category)
+  async create(req:Request, res:Response, next: NextFunction): Promise<any> {
+    try{
+      const {name, category_slug} = req.body
+      const category = await categoryService.create({name, category_slug})
+      return res.json(category)
+    }
+    catch(error){
+      next(ApiError.badRequest(`Ошибка при создании Category: ${error}`))
+    }
   };
 
-  async getAll(req:Request, res:Response):Promise<any> {
-    const categories = await models.ProductCategory.findAll();
-    return res.json(categories)
+  async getAll(req:Request, res:Response, next: NextFunction):Promise<any> {
+    try{
+      const categories = await categoryService.getAll();
+      return res.json(categories)
+    }
+    catch(error){
+      next(ApiError.badRequest(`Ошибка при запросе Categories: \n${error}`))
+    }
+    
   }
 }
 
