@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction} from 'express';
-import models from '../models/models'
+import {Category} from '../models/product_category'
 import ApiError from '../error/ApiError';
-import { stringify } from 'querystring';
+import categoryService from '../services/categoryService';
+
 
 class CategoryController {
   
@@ -11,19 +12,18 @@ class CategoryController {
   
   async create(req:Request, res:Response, next: NextFunction): Promise<any> {
     try{
-      const {name} = req.body
-      const category = await models.Categories.create({name})
+      const {name, category_slug} = req.body
+      const category = await categoryService.create({name, category_slug})
       return res.json(category)
     }
     catch(error){
       next(ApiError.badRequest(`Ошибка при создании Category: ${error}`))
     }
-    
   };
 
   async getAll(req:Request, res:Response, next: NextFunction):Promise<any> {
     try{
-      const categories = await models.Categories.findAll();
+      const categories = await categoryService.getAll();
       return res.json(categories)
     }
     catch(error){

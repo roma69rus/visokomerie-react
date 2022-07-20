@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import models from '../models/models'
 import ApiError from '../error/ApiError';
-import { Json } from 'sequelize/types/utils';
+import sliderService from '../services/sliderService';
 
 class SliderController {
   
@@ -11,8 +10,14 @@ class SliderController {
   
   async create(req:Request, res:Response, next: NextFunction): Promise<any> {
     try {
-      const {img_path, url, btn_txt, isVideo, slide_order} = req.body
-      const slide = await models.Slider.create({img_path, url, btn_txt, isVideo, slide_order})
+      const {url, btn_text, isVideo} = req.body
+      const {image} = req.files as any;
+
+      const slide = await sliderService.create({
+        url, btn_text, isVideo,
+        img_path: ''
+      }, image)
+
       return res.json(slide)  
 
     } catch (error) {
@@ -23,7 +28,7 @@ class SliderController {
 
   async getAll(req:Request, res:Response, next:NextFunction):Promise<any> {
     try {
-      const slides = await models.Slider.findAll();
+      const slides = await sliderService.getAll();
       return res.json(slides)      
     } catch (error) {
       next (ApiError.badRequest(`Ошибка при запросе slider Slide: \n${error}`))

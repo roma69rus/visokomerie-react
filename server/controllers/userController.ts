@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import ApiError from '../error/ApiError';
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-import models from '../models/models';
+import {User} from '../models/user';
 
 
 const generateJwt = (id:string, email:string, role:string) => {
@@ -26,15 +26,15 @@ class UserController {
         return next(ApiError.badRequest('Некорректный email или пароль'));
       }
   
-      const candidate = await models.User.findOne({where: {email: email}})
+      const candidate = await User.findOne({where: {email: email}})
       if (candidate) {
           return next(ApiError.badRequest('Пользователь с таким email уже существует'))
       }
   
       const hashPassword = await bcrypt.hash(password, 5)
-      const user = await models.User.create({email, role, password: hashPassword})
-      const id = user.get('id');
-      const token = generateJwt(id as string, email, role)
+      const user = await User.create({email, role, password: hashPassword})
+      const id = user.get('id').toString();
+      const token = generateJwt(id, email, role)
       
       return res.json({token});      
     } catch (error) {
@@ -46,8 +46,8 @@ class UserController {
     try {
       const {email, password} = req.body
       
-      const user = await models.User.findOne({where: {email}})
-      const id = user?.get('id');
+      const user = await User.findOne({where: {email}})
+      const id = user?.get('id').toString();
       const role = user?.get('role');
       const pass  = user?.get('password');
   
@@ -63,14 +63,11 @@ class UserController {
     } catch (error) {
       next (ApiError.internal(`Ошибка в операции LOGIN на сервере: \n${error}`))
     }
-    
   }
-
   async check(req:Request, res:Response, next: NextFunction):Promise<any> {
       const token = generateJwt(req.body.user.id, req.body.user.email, req.body.user.role)
       return res.json({token})
-  }  
-  
+  } 
 }
 
 export default new UserController();

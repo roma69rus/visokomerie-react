@@ -1,7 +1,6 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
 import sequilize from './db';
-import models from './models/models';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
 import routes from './routes/indexRouter';
