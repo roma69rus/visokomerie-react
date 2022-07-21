@@ -3,12 +3,10 @@ import * as React from 'react';
 export interface IProductProps {
 }
 
-export default class Product extends React.Component<IProductProps> {
-  public render() {
-    return (
-      <div>
-        PRODUCT
-      </div>
-    );
-  }
+export function Product(props: IProductProps) {
+  return (
+    <div>
+      Product
+    </div>
+  );
 }

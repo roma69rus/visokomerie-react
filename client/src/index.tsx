@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import UserStore from './store/UserStore';
+import ProductStore from './store/ProductStore'
+
+export const Context = createContext(null as any)
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  <Context.Provider value={{
+    user: new UserStore(),
+    product: new ProductStore()
+  }}>
+
     <App />
-  </React.StrictMode>
+  </Context.Provider>,
+
 );
 
 
