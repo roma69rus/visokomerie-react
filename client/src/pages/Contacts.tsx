@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Header } from '../components/UI/header/Header';
 
-export interface IAdminProps {
+export interface IContactsProps {
 }
 
-export function Admin(props: IAdminProps) {
+export function Contacts (props: IContactsProps) {
   return (
     <div>
       <Header/>
-      Admin
+      Contacts
+      
     </div>
   );
 }
-

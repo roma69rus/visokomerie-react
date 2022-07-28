@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Header } from '../components/UI/header/Header';
 
-export interface IAdminProps {
+export interface ICatalogProps {
 }
 
-export function Admin(props: IAdminProps) {
+export function Catalog (props: ICatalogProps) {
   return (
     <div>
       <Header/>
-      Admin
+      Catalog
+      
     </div>
   );
 }
-

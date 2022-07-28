@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { Header } from '../components/UI/header/Header';
 
-export interface IAdminProps {
+export interface ISearchProps {
 }
 
-export function Admin(props: IAdminProps) {
+export function Search (props: ISearchProps) {
   return (
     <div>
       <Header/>
-      Admin
+      Search
     </div>
   );
 }
-

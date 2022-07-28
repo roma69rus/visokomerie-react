@@ -3,7 +3,14 @@ import Auth from "./pages/Auth"
 import { Cart } from "./pages/Cart"
 import { Product } from "./pages/Product"
 import { Shop } from "./pages/Shop"
-import { ADMIN_ROUTE, CART_ROUTE, LOGIN_ROUTE, PRODUCT_ROUTE, SHOP_ROUTE } from "./utils/consts"
+import { Catalog } from "./pages/Catalog"
+import { Delivery } from "./pages/Delivery"
+import { About } from "./pages/About"
+import { Contacts } from "./pages/Contacts"
+import { Policy } from "./pages/Policy"
+import { Search } from "./pages/Search"
+
+import { ADMIN_ROUTE, CART_ROUTE, LOGIN_ROUTE, PRODUCT_ROUTE, SHOP_ROUTE, CATALOG_ROUTE, DELIVERY_ROUTE, ABOUT_ROUTE, CONTACTS_ROUTE, POLICY_ROUTE, SEARCH_ROUTE } from "./utils/consts"
 
 export const authRoutes = [
   {
@@ -29,4 +36,29 @@ export const publicRoutes = [
     path: LOGIN_ROUTE,
     Component: Auth
   },
+  {
+    path: CATALOG_ROUTE,
+    Component: Catalog
+  },
+  {
+    path: DELIVERY_ROUTE,
+    Component: Delivery
+  },
+  {
+    path: ABOUT_ROUTE,
+    Component: About
+  },
+  {
+    path: CONTACTS_ROUTE,
+    Component: Contacts
+  },
+  {
+    path: POLICY_ROUTE,
+    Component: Policy
+  },
+  {
+    path: SEARCH_ROUTE,
+    Component: Search
+  },
+  
 ]
