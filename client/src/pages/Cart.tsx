@@ -1,14 +1,15 @@
 import * as React from 'react';
+import { Header } from '../components/UI/header/Header';
 
 export interface ICartProps {
 }
 
-export default class Cart extends React.Component<ICartProps> {
-  public render() {
-    return (
-      <div>
-        
-      </div>
-    );
-  }
+export function Cart(props: ICartProps) {
+  return (
+    <div>
+      <Header/>
+      Cart
+    </div>
+  );
 }
+

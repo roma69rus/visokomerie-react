@@ -1,24 +1,26 @@
 import * as React from 'react';
-import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { Context } from '../index';
 import { authRoutes, publicRoutes } from '../routes';
 
 export interface IAppRouterProps {
-  // isAuth:boolean;
 }
 
-export default class AppRouter extends React.Component<IAppRouterProps> {
-  isAuth = true;
-  public render() {
-    return (
-      <Routes>
-        {this.isAuth === true && authRoutes.map(({path, Component}) =>
-          <Route key={path} path = {path}>{Component}</Route>
-        )}
-        {publicRoutes.map(({path, Component}) =>
-          <Route key={path} path = {path}>{Component}</Route>
-        )}
-      </Routes>
-    );
-  }
+export function AppRouter(props: IAppRouterProps) {
+  const { user } = React.useContext(Context)
+  console.log(user)
+  return (
+    <Routes>
+      {user.isAuth && authRoutes.map(({ path, Component }) =>
+        <Route key={path} path={path} element={<Component />} />
+      )}
+      {publicRoutes.map(({ path, Component }) =>
+        <Route key={path} path={path} element={<Component />} />
+      )}
+      <Route path="*" element={<Navigate to="/" replace />}
+      />
+    </Routes>
+  );
 }
+
 

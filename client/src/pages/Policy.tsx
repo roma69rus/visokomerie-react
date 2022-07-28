@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { Header } from '../components/UI/header/Header';
 
-export interface IAdminProps {
+export interface IPolicyProps {
 }
 
-export function Admin(props: IAdminProps) {
+export function Policy (props: IPolicyProps) {
   return (
     <div>
       <Header/>
-      Admin
+      Policy
     </div>
   );
 }
-

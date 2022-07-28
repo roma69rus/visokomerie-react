@@ -1,14 +1,14 @@
 import * as React from 'react';
+import { Header } from '../components/UI/header/Header';
 
 export interface IShopProps {
 }
 
-export default class Shop extends React.Component<IShopProps> {
-  public render() {
-    return (
-      <div>
-        SHOP
-      </div>
-    );
-  }
+export function Shop(props: IShopProps) {
+  return (
+    <div>
+      <Header/>
+      Shop
+    </div>
+  );
 }
