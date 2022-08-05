@@ -24,7 +24,7 @@ export function Header(props: IHeaderProps) {
         <Brand />
         <div className="header__inner">
           <NavBar active={burger} setActive={setBurger} />
-          <Search />
+          {/* <Search /> */}
           <HeaderCart />
         </div>
       </div>

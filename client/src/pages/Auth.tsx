@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import Card from "react-bootstrap/Card"
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 export interface IAuthProps {
 }
@@ -27,11 +26,7 @@ export default function Auth(props: IAuthProps) {
             Войти
           </Button>
         </Form>
-    
-
-
       </Card>
-
     </Container>
   );
 }
