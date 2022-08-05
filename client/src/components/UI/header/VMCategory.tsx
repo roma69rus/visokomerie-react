@@ -15,14 +15,9 @@ export function VMCategory(props: IVMCategoryProps) {
     setTimeout(() => navigate(path), 400)
   };
 
-  const { product } = React.useContext(Context) as IContext
-  console.log("product", product)
-  console.log("JSON.parse(JSON.stringify(product))", JSON.parse(JSON.stringify(product)) )
-  console.log("product.category", product.category)
-  console.log("JSON.parse(JSON.stringify(product.category))", JSON.parse(JSON.stringify(product.category)) )
+  const { productData } = React.useContext(Context) as IContext
   
-
-  const categories: ICategory[] = [...JSON.parse(JSON.stringify(product.category))]
+  const categories: ICategory[] = [...JSON.parse(JSON.stringify(productData.categories))]
   console.log("categories", categories)
 
   return (

@@ -7,11 +7,11 @@ export interface IAppRouterProps {
 }
 
 export function AppRouter(props: IAppRouterProps) {
-  const {user} = React.useContext(Context) as IContext
-  console.log(user)
+  const {userData} = React.useContext(Context) as IContext
+  console.log(userData)
   return (
     <Routes>
-      {user.isAuth && authRoutes.map(({ path, Component }) =>
+      {userData.isAuth && authRoutes.map(({ path, Component }) =>
         <Route key={path} path={path} element={<Component />} />
       )}
       {publicRoutes.map(({ path, Component }) =>

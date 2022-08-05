@@ -7,12 +7,13 @@ import SliderStore, { ISliderStore } from './store/SliderStore';
 
 
 export interface IContext {
-  user: any;
-  product: IProductStore;
-  slider: ISliderStore;
+  userData: any;
+  productData: IProductStore;
+  sliderData: ISliderStore;
 }
 
 export const Context = createContext<IContext | null>(null)
+console.log("REACT_APP_API_URL", process.env.REACT_APP_API_URL)
 
 
 const root = ReactDOM.createRoot(
@@ -20,9 +21,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Context.Provider value={{
-    user: new UserStore(),
-    product: new ProductStore(),
-    slider: new SliderStore(),
+    userData: new UserStore(),
+    productData: new ProductStore(),
+    sliderData: new SliderStore(),
   }}>
 
     <App />

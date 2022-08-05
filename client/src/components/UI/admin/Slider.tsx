@@ -14,8 +14,8 @@ export interface IAdmSliderProps {
 
 export function AdmSlider(props: IAdmSliderProps) {
 
-  const { slider } = React.useContext(Context) as IContext
-  const inputs: Array<ISlider> | null = JSON.parse(JSON.stringify(slider.slider))
+  const { sliderData } = React.useContext(Context) as IContext
+  const inputs: Array<ISlider> | null = JSON.parse(JSON.stringify(sliderData.slider))
   console.log(inputs);
 
   const [modalShow, setModalShow] = React.useState(false);
@@ -69,6 +69,9 @@ export function AdmSlider(props: IAdmSliderProps) {
                     value={slide.btn_text as string}
                   />
                 </InputGroup>
+                <Button variant="success" type="submit" className='mb-2'>
+                  Сохранить
+                </Button>
               </Form>
             </Col>
             <hr />

@@ -13,10 +13,10 @@ import { ICategory } from '../../../store/ProductStore';
 export interface IAdmCategoriesProps {
 }
 
-export function AdmCategories (props: IAdmCategoriesProps) {
+export function AdmCategories(props: IAdmCategoriesProps) {
 
-  const { product } = React.useContext(Context) as IContext
-  const inputs: Array<ICategory> | null = JSON.parse(JSON.stringify(product.category))
+  const { productData } = React.useContext(Context) as IContext
+  const inputs: Array<ICategory> | null = JSON.parse(JSON.stringify(productData.categories))
   console.log(inputs);
 
   const [modalShow, setModalShow] = React.useState(false);
@@ -26,14 +26,14 @@ export function AdmCategories (props: IAdmCategoriesProps) {
 
       <div className="d-grid gap-2">
         <Button variant="primary" size="lg" onClick={() => setModalShow(true)}>
-          Создать слайд
+          Создать новую категорию
         </Button>
       </div>
       {inputs?.map((cat) => {
         return (
           <Row className='mt-4' key={cat.id}>
             <Col md={6}>
-              <Form>                
+              <Form>
                 <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
                   <InputGroup.Text id="inputGroup-sizing-sm">NAME</InputGroup.Text>
                   <Form.Control
@@ -63,9 +63,12 @@ export function AdmCategories (props: IAdmCategoriesProps) {
                   <Form.Control
                     aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm"
-                    value={cat.category_order}
+                    value={cat.category_order as number}
                   />
                 </InputGroup>
+                <Button variant="success" type="submit" className='mb-2'>
+                  Сохранить
+                </Button>
               </Form>
             </Col>
             <hr />

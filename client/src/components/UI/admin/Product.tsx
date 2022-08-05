@@ -14,8 +14,8 @@ export interface IAdmProductProps {
 
 export function AdmProduct(props: IAdmProductProps) {
 
-  const { product } = React.useContext(Context) as IContext
-  const inputs: Array<IProduct> | null = JSON.parse(JSON.stringify(product.product))
+  const { productData } = React.useContext(Context) as IContext
+  const inputs: Array<IProduct> | null = JSON.parse(JSON.stringify(productData.allProducts))
   console.log(inputs);
 
   const [modalShow, setModalShow] = React.useState(false);
@@ -72,6 +72,9 @@ export function AdmProduct(props: IAdmProductProps) {
                     value = {prod.sizetable_path as string}
                   />
                 </InputGroup>
+                <Button variant="success" type="submit" className='mb-2'>
+                  Сохранить
+                </Button>
               </Form>
             </Col>
             <hr />

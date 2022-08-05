@@ -46,7 +46,8 @@ class ProductController {
     try{
       const {page, limit}  = req.query;
 
-      const products = await productService.getAllProduct(Number(limit), Number(page))
+      // const products = await productService.getAllProduct(Number(limit), Number(page))
+      const products = await productService.getAllProduct()
 
       return res.json(products)
     }

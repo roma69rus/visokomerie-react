@@ -42,31 +42,38 @@ class productService {
     return {"product_options": createdOptions, "product_options_images":createdImages};
   }
 
-  async getAllProduct(limit:number, page: number):Promise<any> {
+  // async getAllProduct(limit:number, page: number):Promise<any> {
+  async getAllProduct():Promise<any> {
 
-    limit = limit || 100;   //по умолчанию 100 элементов на странице
-    page = page || 1        //по умолчанию первая страница
+    // limit = limit || 100;   //по умолчанию 100 элементов на странице
+    // page = page || 1        //по умолчанию первая страница
 
-    let offset: number = page * limit - limit
+    // let offset: number = page * limit - limit
 
-    const products = await Product.findAll({
-      include:[{
-        model: ProductOptions, 
-        required: false
+    const products = await Product.findAll({ 
+      include: { 
+        all: true, 
+        nested: true 
       }
-    ]});
-    
-    const product_options = await ProductOptions.findAndCountAll({
-      include:[{
-        model: ProductOptionsImages, 
-        where: {main_image: true},
-        required: false
-      }],
-      limit,
-      offset
     });
+    // const products = await Product.findAll({
+    //   include:[{
+    //     model: ProductOptions, 
+    //     required: false
+    //   }
+    // ]});
+    
+    // const product_options = await ProductOptions.findAndCountAll({
+    //   include:[{
+    //     model: ProductOptionsImages, 
+    //     where: {main_image: true},
+    //     required: false
+    //   }],
+    //   limit,
+    //   offset
+    // });
 
-    return {products, product_options}
+    return products;
   }
 
   async getOptionsByProductName(product_slug:string, color:any, page:number, limit:number):Promise<any> {
@@ -90,7 +97,7 @@ class productService {
             where: {main_image: true},
             required: false,
           }],
-        }],
+        }, {model: Category}],        
         limit,
         offset
       });
@@ -109,9 +116,7 @@ class productService {
             where: {main_image: true},
             required: false
           }],
-        }],
-        limit,
-        offset
+        }, {model: Category}],
       });
       result = productOpt;
     }
