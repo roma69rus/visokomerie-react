@@ -58,34 +58,13 @@
         /* background-color: rgba(0,0,0, 0); */
     }
 
-
-    .app__logo {
-        padding-bottom: 30px;
-        padding-left: 0.5em;
-        letter-spacing: 0.5em;
-        font-size: 30px;
+    .swiper-slide {
+        width: 100%;
     }
 
-    .app__sub {
-        padding-left: 0.5em;
-        letter-spacing: 0.5em;
-        font-size: 20px;
-    }
-
-    .app__glitch {
-        font-size: 35px;
-        letter-spacing: 0.3em;
-    }
 
     .container {
         padding: 5px 15px 0px 15px;
-    }
-
-    .swiper-slide {
-        /* padding-top: 100px; */
-        position: relative;
-        padding-top: 0px;
-        text-align: center;
     }
 
     /* .footer-right {
@@ -426,7 +405,9 @@
         margin-bottom: 9px;
     }
 
-    .swiper__text {
+
+
+    /* .swiper__text {
         width: 100%;
         font-weight: 800;
         font-size: 25px;
@@ -437,7 +418,7 @@
         position: absolute;
         top: 150px;
         left: 0;
-    }
+    } */
 
     .hero-content__text {
         /* padding-top: 10px; */
@@ -461,106 +442,6 @@
         margin-right: 0;
     }
 
-    .swiper-slide {
-        text-align: center;
-        /* padding: 60px 22px 0; */
-        padding: 0px 0px 0;
-    }
-
-    .swiper-container-horizontal>.swiper-pagination-bullets,
-    .swiper-pagination-custom,
-    .swiper-pagination-fraction {
-        bottom: 10px;
-    }
-
-    .swiper-pagination-bullet {
-        height: 10px;
-        width: 10px;
-    }
-
-
-    .work {
-        padding-top: 42px;
-    }
-
-    .work__heading {
-        margin-bottom: 20px;
-        font-size: 24px;
-    }
-
-    .work__btn {
-        font-size: 14px;
-    }
-
-    .work__list {
-        margin-bottom: 9px;
-    }
-
-    .work-right__img {
-        height: 160px;
-    }
-
-    .work-right {
-        margin-bottom: 18px;
-    }
-
-    .work__inner {
-        margin-bottom: 18px;
-    }
-
-    .work-left__title {
-        font-size: 21px;
-        font-weight: 500;
-        margin-bottom: 12px;
-    }
-
-    .work-left__text {
-        font-size: 15px;
-        line-height: 32px;
-        margin-bottom: 23px;
-    }
-
-    .work-left__btn {
-        font-size: 12px;
-        padding: 13px 35px;
-    }
-
-    .work-left__btn:first-child {
-        margin-right: 10px;
-        padding: 14px 48px;
-    }
-
-    .questions {
-        padding-top: 64px;
-        padding-bottom: 59px;
-    }
-
-    .questions__heading {
-        margin: 0;
-        margin-bottom: 17px;
-    }
-
-    .questions__title {
-        font-size: 15px;
-        line-height: 24px;
-        font-weight: 500;
-        margin-right: 56px;
-    }
-
-    .questions__wrapper {
-        padding: 30px 0;
-    }
-
-    .accordion-icon {
-        width: 30px;
-        height: 30px;
-        background-size: 18px;
-        top: 40px;
-    }
-
-    .questions__descr {
-        font-style: 14px;
-    }
 
     .footer {
         padding-top: 20px;

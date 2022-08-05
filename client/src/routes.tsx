@@ -60,5 +60,6 @@ export const publicRoutes = [
     path: SEARCH_ROUTE,
     Component: Search
   },
+
   
 ]

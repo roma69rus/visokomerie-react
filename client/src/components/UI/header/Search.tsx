@@ -12,7 +12,7 @@ export function Search (props: ISearchProps) {
             <span>
               <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="19.5138" y="18.5495" width="8" height="2" transform="rotate(45 19.5138 18.5495)" fill="#ececec" />
-                <circle cx="11.5" cy="11.5" r="10.5" stroke="#ececec" stroke-width="2" />
+                <circle cx="11.5" cy="11.5" r="10.5" stroke="#ececec" strokeWidth="2" />
               </svg>
             </span>
     </button>

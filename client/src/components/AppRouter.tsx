@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { Context } from '../index';
+import { Context, IContext } from '../index';
 import { authRoutes, publicRoutes } from '../routes';
 
 export interface IAppRouterProps {
 }
 
 export function AppRouter(props: IAppRouterProps) {
-  const { user } = React.useContext(Context)
+  const {user} = React.useContext(Context) as IContext
   console.log(user)
   return (
     <Routes>

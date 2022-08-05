@@ -2,14 +2,52 @@ import { makeAutoObservable } from "mobx";
 import { Product } from "../pages/Product";
 
 
-interface IDeviceStore {
-  _category: Array<any>
-  _product: Array<any>
+export interface IProduct {
+  id: number,
+  name: string,
+  description: string | null,
+  price: number,
+  product_slug: string,
+  sizetable_path: string | null,
+  ProductOptions: Array<IProductOptions>
 }
 
-export default class DeviceStore implements IDeviceStore {
-  _category: Array<any>;
-  _product: Array<any>;
+export interface ICategory {
+  id: number;
+  name: string;
+  description: string;
+  category_slug: string;
+  category_order: number;
+  Products: Array<IProduct  | null>;
+}
+
+export interface IProductOptions {
+  id: number;
+  description: string | null;
+  product_color: string;
+  price_increase: number;
+  po_order: number | null;
+  options_slug: string;
+  ProductId: number;
+  ProductOptionsImages: Array<IProductOptionsImages | null> 
+}
+
+export interface IProductOptionsImages {
+  id: number;
+  img_path: string;
+  main_image: boolean;
+  ProductOptionId: number;
+}
+
+
+export interface IProductStore {
+  category: Array<ICategory>
+  product: Array<IProduct>
+}
+
+export default class ProductStore implements IProductStore {
+  private _category: Array<ICategory>;
+  private _product: Array<IProduct>;
   constructor() {
     this._category = [
       {
@@ -17,6 +55,7 @@ export default class DeviceStore implements IDeviceStore {
         "name": "Брюки",
         "description": "Брюки Брюки Брюки Брюки Брюки Брюки Брюки Брюки Брюки Брюки Брюки",
         "category_slug": "bruki",
+        "category_order": 10,
         "Products": [],
       },
       {
@@ -24,9 +63,11 @@ export default class DeviceStore implements IDeviceStore {
         "name": "Костюмы",
         "description": "Брюки Брюки Брюки Брюки Брюки Брюки Брюки Брюки Брюки Брюки Брюки",
         "category_slug": "suits",
+        "category_order": 20,
         "Products": []
       }
     ];
+    
 
     this._product = [{
       "id": 2,
@@ -64,7 +105,7 @@ export default class DeviceStore implements IDeviceStore {
           "ProductOptionsImages": [
             {
               "id": 13,
-              "img_path": "3d9b2ae0-a9c5-4126-96f0-e257323f211e.jpg",
+              "img_path": "1_black_palaco.jpg",
               "main_image": true,
               "ProductOptionId": 4,
             }
