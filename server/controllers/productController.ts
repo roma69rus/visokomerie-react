@@ -42,12 +42,41 @@ class ProductController {
     }
   }
 
-  async getAllProduct(req:Request, res:Response, next: NextFunction):Promise<any> {
+  async getAllProductsWithOptions(req:Request, res:Response, next: NextFunction):Promise<any> {
     try{
-      const {page, limit} = req.query;
+      // const {page, limit}  = req.query;
 
-      // const products = await productService.getAllProduct(Number(limit), Number(page))
-      const products = await productService.getAllProduct()
+      // const products = await productService.getAllProductsWithOptions(Number(limit), Number(page))
+      const products = await productService.getAllProductsWithOptions()
+
+      return res.json(products)
+    }
+    catch(error) {
+      next(ApiError.badRequest(`Ошибка при запросе AllProduct: ${error}`))
+    }  
+  }
+
+  async getAllProducts(req:Request, res:Response, next: NextFunction):Promise<any> {
+    try{
+      // const {page, limit}  = req.query;
+
+      const products = await productService.getAllProducts()
+      // const products = await productService.getAllProductsWithOptions()
+
+      return res.json(products)
+    }
+    catch(error) {
+      next(ApiError.badRequest(`Ошибка при запросе AllProduct: ${error}`))
+    }  
+  }
+
+  async getAllOptions(req:Request, res:Response, next: NextFunction):Promise<any> {
+    try{
+      const {page, limit}  = req.query;
+      let {ProductId} = req.params;
+
+      const products = await productService.getAllOptions(Number(ProductId), Number(limit), Number(page))
+      // const products = await productService.getAllProductsWithOptions()
 
       return res.json(products)
     }

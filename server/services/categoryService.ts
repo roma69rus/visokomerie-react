@@ -1,25 +1,25 @@
 import { v4 as uuidv4 } from 'uuid';
 import path from 'path'
 
-import {IOptionsInput, ProductOptions} from       '../models/product_options'
-import {IProductInput, Product} from              '../models/product'
-import {IImagesInput, ProductOptionsImages} from  '../models/product_images'
-import {ICategoryInput, Category} from            '../models/product_category'
+import { IOptionsInput, ProductOptions } from '../models/product_options'
+import { IProductInput, Product } from '../models/product'
+import { IImagesInput, ProductOptionsImages } from '../models/product_images'
+import { ICategoryInput, Category } from '../models/product_category'
 
 
 
 class CategoryService {
-  
-  constructor(){
+
+  constructor() {
 
   }
-  
-  async create(dto:ICategoryInput) {
-      const category = await Category.create(dto)
-      return JSON.parse(JSON.stringify(category)) 
+
+  async create(dto: ICategoryInput) {
+    const category = await Category.create(dto)
+    return JSON.parse(JSON.stringify(category))
   };
 
-  async createProductRelationship(productId: number, categoryId: number){
+  async createProductRelationship(productId: number, categoryId: number) {
     const product = await Product.findByPk(productId);
     const category = await Category.findByPk(categoryId);
 
@@ -28,15 +28,27 @@ class CategoryService {
     return category;
   }
 
-  async getAll():Promise<any> {
-   
-      const categories = await Category.findAll({ 
-        include: { 
-          all: true, 
-          nested: true 
-        }
-      });
-      return JSON.parse(JSON.stringify(categories))
+  async getAll(): Promise<any> {
+
+    const categories = await Category.findAll({
+      include: {
+        all: true,
+        nested: true
+      }
+    });
+    return JSON.parse(JSON.stringify(categories))
+  }
+
+  async getOneCategory(category_slug: string): Promise<any> {
+
+    const categories = await Category.findOne({
+      where: { category_slug: category_slug },
+      include: {
+        all: true,
+        nested: true
+      }
+    });
+    return JSON.parse(JSON.stringify(categories))
   }
 
 

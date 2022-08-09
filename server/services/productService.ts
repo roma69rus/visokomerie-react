@@ -42,25 +42,19 @@ class productService {
     return {"product_options": createdOptions, "product_options_images":createdImages};
   }
 
-  // async getAllProduct(limit:number, page: number):Promise<any> {
-  async getAllProduct():Promise<any> {
+  // async getAllProductsWithOptions(limit:number, page: number):Promise<any> {
+  async getAllProductsWithOptions():Promise<any> {
 
     // limit = limit || 100;   //по умолчанию 100 элементов на странице
     // page = page || 1        //по умолчанию первая страница
 
     // let offset: number = page * limit - limit
 
-    // const products = await ProductOptions.findAll({ 
-    //   include: { 
-    //     all: true, 
-    //     nested: true 
-    //   }
-    // });
-
-
-
-    // console.log(products, products)
-
+    const products = await Product.findAll({
+      include: {
+        all: true, 
+        nested: true }
+    })
 
     // const products = await Product.findAll({
     //   include:[{
@@ -79,7 +73,46 @@ class productService {
     //   offset
     // });
 
-    return products;
+    // return {products, product_options}
+    return products
+  }
+
+  async getAllOptions(ProductId: number, limit:number, page: number):Promise<any> {
+
+    limit = limit || 100;   //по умолчанию 100 элементов на странице
+    page = page || 1        //по умолчанию первая страница
+
+    let offset: number = page * limit - limit
+
+    if (ProductId){
+      return await ProductOptions.findOne({
+        where: {ProductId: ProductId},
+        include: {
+          all: true, 
+          nested: true },
+      })
+    }else{
+      return await ProductOptions.findAll({
+        include: {
+          all: true, 
+          nested: true },
+          limit,
+          offset
+      })
+    }
+  }
+
+  async getAllProducts():Promise<any>{
+
+    const products = await Product.findAll()    
+    const result:any = {};
+
+    for (let i = 0; i < products.length; i++) {
+      result[products[i]['id']] = products[i]
+    }
+
+    return result
+      
   }
 
   async getOptionsByProductName(product_slug:string, color:any, page:number, limit:number):Promise<any> {
@@ -103,7 +136,7 @@ class productService {
             where: {main_image: true},
             required: false,
           }],
-        }, {model: Category}],        
+        }],
         limit,
         offset
       });
@@ -122,7 +155,9 @@ class productService {
             where: {main_image: true},
             required: false
           }],
-        }, {model: Category}],
+        }],
+        limit,
+        offset
       });
       result = productOpt;
     }
@@ -145,7 +180,7 @@ class productService {
       const product  = await Product.findOne({where: {id: productId}})
       const category = await Category.findOne({where: {id: categoryId}});
 
-      await product?.$set('Categories', [category!.get('id')])
+      const result = await product?.$set('Categories', [category!.get('id')])
 
       return product;
     }

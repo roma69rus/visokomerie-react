@@ -31,6 +31,19 @@ class CategoryController {
     }
     
   }
+  async getOneCategory(req:Request, res:Response, next: NextFunction):Promise<any> {
+    try{
+
+      let {category_slug} = req.params;
+      
+      const category = await categoryService.getOneCategory(category_slug)
+      return res.json(category)
+    }
+    catch(error){
+      next(ApiError.badRequest(`Ошибка при запросе Categories: \n${error}`))
+    }
+    
+  }
 }
 
 export default new CategoryController();

@@ -6,6 +6,7 @@ const router = Router();
 
 router.post('/', checkRole('ADMIN'), categoryController.create)
 router.get('/', categoryController.getAll)
+router.get('/:category_slug', categoryController.getOneCategory)
 
 
 
