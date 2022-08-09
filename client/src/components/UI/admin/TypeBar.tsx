@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { observer } from 'mobx-react-lite'
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Context } from '../../..';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SHOP_ROUTE } from '../../../utils/consts';
 
 export interface IAdmTypeBarProps {
   selectedItem: string;
@@ -9,7 +12,8 @@ export interface IAdmTypeBarProps {
 }
 
 export const AdmTypeBar = observer((props: IAdmTypeBarProps) => {
-  
+  const { userData } = useContext(Context) as any
+  const navigate = useNavigate()
   return (
     <div>
       <ListGroup>
@@ -49,7 +53,18 @@ export const AdmTypeBar = observer((props: IAdmTypeBarProps) => {
         >Product-To-Category
         </ListGroup.Item>
       </ListGroup>
-
+      <Button
+        variant="danger"
+        style={{ marginTop: "30px", marginBottom: "30px" }}
+        onClick={()=> {
+          userData.setIsAuth(false)
+          userData.setUser({})
+          localStorage.removeItem('token')
+          navigate(SHOP_ROUTE)
+          console.log(userData)
+        }}
+      >Выйти
+      </Button>
     </div>
   );
 })

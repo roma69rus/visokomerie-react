@@ -10,7 +10,7 @@ export default class UserStore implements IUserStore {
   private _isAuth: boolean;
   private _user: any;
   constructor() {
-    this._isAuth = true;
+    this._isAuth = false;
     this._user = {};
     makeAutoObservable(this)
   }

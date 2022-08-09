@@ -1,6 +1,6 @@
 import {ProductOptionsImages} from './product_images'
 import {Product} from './product'
-import {Column, Model, Table, ForeignKey, DataType, CreatedAt, UpdatedAt, DeletedAt, HasMany} from 'sequelize-typescript'
+import {Column, Model, Table, ForeignKey, DataType, CreatedAt, UpdatedAt, DeletedAt, HasMany, HasOne} from 'sequelize-typescript'
 
 
 export interface IOptionsInput {

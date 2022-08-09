@@ -44,7 +44,7 @@ class ProductController {
 
   async getAllProduct(req:Request, res:Response, next: NextFunction):Promise<any> {
     try{
-      const {page, limit}  = req.query;
+      const {page, limit} = req.query;
 
       // const products = await productService.getAllProduct(Number(limit), Number(page))
       const products = await productService.getAllProduct()

@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { VMCard } from '../components/UI/card/VMCard';
 import { VMFooter } from '../components/UI/footer/VMFooter';
@@ -8,7 +9,7 @@ import { ProductGrid } from '../components/UI/productGrid/ProductGrid';
 export interface IShopProps {
 }
 
-export function Shop(props: IShopProps) {
+export const Shop = observer((props: IShopProps) => {
   return (
     <div>
       <Header/>
@@ -18,4 +19,4 @@ export function Shop(props: IShopProps) {
       <VMFooter/>
     </div>
   );
-}
+})

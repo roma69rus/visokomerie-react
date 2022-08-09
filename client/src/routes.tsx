@@ -1,5 +1,5 @@
 import { Admin } from "./pages/Admin"
-import Auth from "./pages/Auth"
+import {Auth} from "./pages/Auth"
 import { Cart } from "./pages/Cart"
 import { Product } from "./pages/Product"
 import { Shop } from "./pages/Shop"
@@ -33,10 +33,6 @@ export const publicRoutes = [
     Component: Shop
   },
   {
-    path: LOGIN_ROUTE,
-    Component: Auth
-  },
-  {
     path: CATALOG_ROUTE,
     Component: Catalog
   },
@@ -60,6 +56,8 @@ export const publicRoutes = [
     path: SEARCH_ROUTE,
     Component: Search
   },
-
-  
+  {
+    path: LOGIN_ROUTE,
+    Component: Auth
+  }
 ]

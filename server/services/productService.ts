@@ -50,12 +50,18 @@ class productService {
 
     // let offset: number = page * limit - limit
 
-    const products = await Product.findAll({ 
-      include: { 
-        all: true, 
-        nested: true 
-      }
-    });
+    // const products = await ProductOptions.findAll({ 
+    //   include: { 
+    //     all: true, 
+    //     nested: true 
+    //   }
+    // });
+
+
+
+    // console.log(products, products)
+
+
     // const products = await Product.findAll({
     //   include:[{
     //     model: ProductOptions, 
@@ -139,7 +145,7 @@ class productService {
       const product  = await Product.findOne({where: {id: productId}})
       const category = await Category.findOne({where: {id: categoryId}});
 
-      const result = await product?.$set('Categories', [category!.get('id')])
+      await product?.$set('Categories', [category!.get('id')])
 
       return product;
     }
