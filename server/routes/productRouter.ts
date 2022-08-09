@@ -13,5 +13,4 @@ router.get('/', productController.getAllProducts)
 router.get('/:product_slug', productController.getOptionsByProductName)
 
 
-
 export default router;
