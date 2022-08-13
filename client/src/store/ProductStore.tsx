@@ -56,9 +56,14 @@ export interface IProductOptions {
   deletedAt?: string | null;
 }
 
-export interface IProductOptionsImages {
+export interface IImage {
   id: number;
   img_path: string;
+}
+
+export interface IProductOptionsImages extends IImage {
+  // id: number;
+  // img_path: string;
   main_image: boolean;
   ProductOptionId: number;
   createdAt?: string;
@@ -66,18 +71,16 @@ export interface IProductOptionsImages {
   deletedAt?: string | null;
 }
 
-export interface IProductsWithId {
-  [key: string]: IProduct;
-}
+
 
 export interface IProductStore {
   categories: Array<ICategory>
-  category: ICategory;
+  category: ICategory | null;
   allProducts: Array<IProduct>
-  productWithOptions: IProduct;
-  productWithOneOption: IProduct;
+  productWithOptions: IProduct | null;
+  productWithOneOption: IProduct | null;
   allOptions: IProductOptions[];
-  oneOption: IProductOptions;
+  oneOption: IProductOptions | null;
   catsOptions: ICategoryOptions[];
   setCategories(categories: ICategory[]): void;
   setCategory(category: ICategory): void;
@@ -770,7 +773,7 @@ export default class ProductStore implements IProductStore {
     this._productWithOptions = products;
   }
 
-  setProductWithOneOption(product: IProduct | null) {
+  setProductWithOneOption(product: IProduct) {
     this._productWithOneOption = product;
   }
 
@@ -787,24 +790,24 @@ export default class ProductStore implements IProductStore {
     this._catsOptions = catsOptions;
   }
 
-  get categories() {
+  get categories(): ICategory[] {
     return this._categories
   }
 
-  get category() {
+  get category(): ICategory {
     return this._category;
   }
 
-  get allProducts() {
+  get allProducts(): IProduct[] {
     return this._allProducts
   }
 
-  get productWithOptions() {
+  get productWithOptions(): IProduct {
     return this._productWithOptions
   }
 
-  get productWithOneOption(): IProduct {
-    return this._productWithOneOption as IProduct
+  get productWithOneOption(): IProduct | null {
+    return this._productWithOneOption
   }
 
   get allOptions() {

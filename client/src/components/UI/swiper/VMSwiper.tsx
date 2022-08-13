@@ -3,18 +3,21 @@ import * as React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from "swiper";
 
-// Import Swiper styles
-import 'swiper/css';
-import "swiper/css/navigation";
-import "swiper/css/scrollbar";
-import "swiper/css/pagination";
-import { IProductOptionsImages } from '../../../store/ProductStore';
+import { IImage, IProductOptionsImages } from '../../../store/ProductStore';
 
-export interface IVMSwiperProps {
-  images: IProductOptionsImages[]
+
+
+export interface IVMSwiperProps<T extends IImage> {
+  images: Array<T>;
+  // renderImages: (image: T) => React.ReactNode
 }
 
-export function VMSwiper({ images }: IVMSwiperProps) {
+export function VMSwiper<T extends IImage>({ images }: IVMSwiperProps<T>) {
+  
+  React.useEffect(() => {
+    console.log(123)
+  },[])
+  
   return (
     <Swiper
       slidesPerView={"auto"}
@@ -25,7 +28,7 @@ export function VMSwiper({ images }: IVMSwiperProps) {
       loop={true}
       modules={[Pagination, Navigation]}
       className="mySwiper"
-    >
+    > 
       {images && images.map(image => {
         return (
           <SwiperSlide key={image.id}>

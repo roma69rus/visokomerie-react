@@ -27,3 +27,8 @@ export const getAllCategories = async () => {
     const {data} = await $host.get('api/category/')
     return data
 }
+
+export const getMainPageOptions = async () => {
+    const {data} = await $host.get('api/products/options')
+    return data
+}

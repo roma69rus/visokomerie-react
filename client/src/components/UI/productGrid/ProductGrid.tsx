@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Context, IContext } from '../../..';
-import { IProduct, IProductOptions, IProductsWithId } from '../../../store/ProductStore';
+import { IProduct, IProductOptions } from '../../../store/ProductStore';
 import { VMCard } from '../card/VMCard';
 export interface IProductGridProps {
   productsOptions: IProductOptions[]
