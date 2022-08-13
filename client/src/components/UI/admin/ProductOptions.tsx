@@ -57,7 +57,7 @@ export function AdmProductOptions(props: IAdmProductOptions) {
                     productData.setProductWithOptions(data)
                     
                   }).finally(()=> {
-                    setIsLoading(false)
+                    setIsLoading(false) 
                   })
 
                 }}
