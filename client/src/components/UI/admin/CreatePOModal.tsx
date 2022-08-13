@@ -59,9 +59,9 @@ export function CreatePOModal(props: ICreatePOModalProps) {
                 <Form.Group controlId="formFileSm" className="mb-3">
                   <Form.Control type="file" size="sm" multiple />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                {/* <Button variant="primary" type="submit">
                   Сохранить
-                </Button>
+                </Button> */}
               </Form>
     </DefaultCreateModal>
   );

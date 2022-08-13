@@ -96,10 +96,10 @@ class CategoryService {
 
     const categories = await Category.findOne({
       where: { category_slug: category_slug },
-      include: {
-        all: true,
-        nested: true
-      }
+      // include: {
+      //   all: true,
+      //   nested: true
+      // }
     });
     return JSON.parse(JSON.stringify(categories))
   }

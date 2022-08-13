@@ -11,6 +11,7 @@ import { ICategory, IProduct, IProductOptions, IProductOptionsImages } from '../
 import { CreatePOModal } from './CreatePOModal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { CreatePTCModal } from './CreatePTCModal';
+import { getAllProducts, getOptionsByProductName } from '../../../http/productAPI';
 
 
 export interface IAdmProductToCategory {
@@ -19,19 +20,28 @@ export interface IAdmProductToCategory {
 export function AdmProductToCategory(props: IAdmProductToCategory) {
 
   const { productData } = React.useContext(Context) as IContext
-  const prods: IProduct[] = JSON.parse(JSON.stringify(productData.allProducts))
-  const prod: IProduct = JSON.parse(JSON.stringify(productData.productWithOneOption))
-  const inputs: Array<ICategory> = prod.Categories as Array<ICategory>;
-  const allCategories: ICategory[] = JSON.parse(JSON.stringify(productData.categories))
-  console.log(inputs);
 
   const [productNameID, setProductNameID] = React.useState(0);
-  const [prodCategories, setProdCategories] = React.useState<ICategory[]>(prod.Categories as ICategory[])  
+  const [prodCategories, setProdCategories] = React.useState<ICategory[]>([]) 
   const [modalShow, setModalShow] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const addProductCategory = (cat: ICategory) => {
     setProdCategories([...prodCategories, cat])
   }
+
+
+
+  React.useEffect(() => {
+    getAllProducts().then((data) => {
+      setIsLoading(true);
+      productData.setAllProducts(data)
+    }).finally(() => {
+      setIsLoading(false)
+    })
+
+
+  }, [productNameID])
 
   return (
     <div>
@@ -42,11 +52,23 @@ export function AdmProductToCategory(props: IAdmProductToCategory) {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          {prods.map((i) => {
+        {(productData.allProducts || []).map((i) => {
             return (
               <Dropdown.Item
                 key={i.id}
-                onClick={() => setProductNameID(i.id as number)}
+                onClick={() => {
+                  getOptionsByProductName(i.product_slug).then((data) => {
+                    setIsLoading(true)
+                    setProductNameID(i.id as number)
+                    productData.setProductWithOptions(data)
+
+                    setProdCategories(productData.productWithOptions?.Categories as ICategory[])
+
+                    
+                  }).finally(()=> {
+                    setIsLoading(false)
+                  })
+                }}
               >{i.name}
               </Dropdown.Item>
             )
@@ -55,11 +77,11 @@ export function AdmProductToCategory(props: IAdmProductToCategory) {
         </Dropdown.Menu>
       </Dropdown>
 
-      {productNameID
+      {!isLoading && productNameID
         ? <>
-          <h2>{prod.name}</h2>
+          <h2>{productData.productWithOptions?.name}</h2> 
 
-          {prodCategories.map((cat: ICategory) => {
+          {prodCategories.map((cat: ICategory) => {  
             return (
               <Row className='mt-4' key={cat.id}>
                 <Col md={6}>
@@ -89,8 +111,8 @@ export function AdmProductToCategory(props: IAdmProductToCategory) {
             </Button>
           </div>
           <CreatePTCModal
-            prodCategories = {prodCategories}
-            cats={allCategories}
+            prodCategories={prodCategories}
+            cats={productData.categories}
             addCat={addProductCategory}
             show={modalShow}
             onHide={() => setModalShow(false)}

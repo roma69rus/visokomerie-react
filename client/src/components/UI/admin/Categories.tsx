@@ -16,8 +16,7 @@ export interface IAdmCategoriesProps {
 export function AdmCategories(props: IAdmCategoriesProps) {
 
   const { productData } = React.useContext(Context) as IContext
-  const inputs: Array<ICategory> | null = JSON.parse(JSON.stringify(productData.categories))
-  console.log(inputs);
+
 
   const [modalShow, setModalShow] = React.useState(false);
 
@@ -29,7 +28,7 @@ export function AdmCategories(props: IAdmCategoriesProps) {
           Создать новую категорию
         </Button>
       </div>
-      {inputs?.map((cat) => {
+      {(productData.categories || []).map((cat) => {
         return (
           <Row className='mt-4' key={cat.id}>
             <Col md={6}>
@@ -40,6 +39,7 @@ export function AdmCategories(props: IAdmCategoriesProps) {
                     aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm"
                     value={cat.name as string}
+                    onChange = {()=> {}}
                   />
                 </InputGroup>
                 <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
@@ -48,6 +48,7 @@ export function AdmCategories(props: IAdmCategoriesProps) {
                     aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm"
                     value={cat.description as string}
+                    onChange = {()=> {}}
                   />
                 </InputGroup>
                 <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
@@ -56,6 +57,7 @@ export function AdmCategories(props: IAdmCategoriesProps) {
                     aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm"
                     value={cat.category_slug as string}
+                    onChange = {()=> {}}
                   />
                 </InputGroup>
                 <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
@@ -64,6 +66,7 @@ export function AdmCategories(props: IAdmCategoriesProps) {
                     aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm"
                     value={cat.category_order as number}
+                    onChange = {()=> {}}
                   />
                 </InputGroup>
                 <Button variant="success" type="submit" className='mb-2'>

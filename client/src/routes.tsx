@@ -37,6 +37,10 @@ export const publicRoutes = [
     Component: Catalog
   },
   {
+    path: CATALOG_ROUTE + '/:catalog_slug',
+    Component: Catalog
+  },
+  {
     path: DELIVERY_ROUTE,
     Component: Delivery
   },

@@ -13,29 +13,33 @@ export interface IVMSwiperProps<T extends IImage> {
 }
 
 export function VMSwiper<T extends IImage>({ images }: IVMSwiperProps<T>) {
-  
+
   React.useEffect(() => {
-    console.log(123)
-  },[])
-  
+  })
+
   return (
-    <Swiper
-      slidesPerView={"auto"}
-      pagination={{
-        clickable: true,
-      }}
-      navigation={true}
-      loop={true}
-      modules={[Pagination, Navigation]}
-      className="mySwiper"
-    > 
-      {images && images.map(image => {
-        return (
-          <SwiperSlide key={image.id}>
-            <img src={process.env.REACT_APP_API_URL + '/' + image.img_path}/>
-          </SwiperSlide>
-        )
-      })}
-    </Swiper>
+    <>
+      <Swiper
+        slidesPerView={"auto"}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        loop={true}
+        loopedSlides = {10}
+        modules={[Pagination, Navigation]}
+        className="mySwiper"
+      >
+
+        {(images || []).map((image) => {
+          return (
+            <SwiperSlide key={image.id}>
+              <img src={process.env.REACT_APP_API_URL + '/' + image.img_path}/>
+            </SwiperSlide>
+          )
+        })}
+      </Swiper>
+    </>
+
   );
 }

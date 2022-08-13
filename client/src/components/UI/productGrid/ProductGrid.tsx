@@ -11,7 +11,7 @@ export function ProductGrid({ productsOptions }: IProductGridProps) {
 
   return (
     <Container>
-      <Row className='d-flex justify-content-center'>
+      <Row className='d-flex justify-content-center mb-5'>
 
         {/* {mainPageProduct.map(({id, name, description, price, product_slug, sizetable_path, ProductOptions}: IProduct) => { */}
         {productsOptions.map((opt: IProductOptions) => {

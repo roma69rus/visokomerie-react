@@ -1,20 +1,29 @@
 import * as React from 'react';
 import { Dropdown, } from 'semantic-ui-react'
+import { Context, IContext } from '../../..';
+import { ICategory, IProduct, IProductOptions, IProductToCategory } from '../../../store/ProductStore';
 
 export interface IProductInfoSectionProps {
+
 }
 
 export function ProductInfoSection(props: IProductInfoSectionProps) {
+  
+  const { productData } = React.useContext(Context) as IContext
+
+  React.useEffect(()=> {
+  }, [])
+  
   return (
     <section className="product-desciption">
       <div className="product__desciption container" style={{ width: "auto" }}>
-        <h3 className="product__heading" style={{ marginTop: "30px" }}>NAME</h3>
-        <p className="product__text">COLOR        </p>
-        <p className="product__price">10000</p>
+        <h3 className="product__heading" style={{ marginTop: "30px" }}>{productData.productWithOneOption?.name}</h3>
+        <p className="product__text">{productData.productWithOneOption?.ProductOptions[0].product_color}</p>
+        <p className="product__price">{productData.productWithOneOption?.price}</p>
         <div className="product__divider"></div>
-        <Dropdown text='Описание, состав' pointing style={{ color: "black", marginBottom: "30px"}}>
+        <Dropdown text='Описание, состав' pointing style={{ color: "black", marginBottom: "30px" }}>
           <Dropdown.Menu>
-            <Dropdown.Header style={{height: "auto", textWeight: "normal"}}>Описание, состав</Dropdown.Header>
+            <Dropdown.Header style={{ height: "auto", textWeight: "normal" }}>{productData.productWithOneOption?.ProductOptions[0].description}</Dropdown.Header>
           </Dropdown.Menu>
         </Dropdown>
         <p className="product__order-info">Для того, чтобы наши изделия сидели на вас безупречно и были идеального размера, мы поможем вам определить размер после оформления заказа в WhatsApp.</p>

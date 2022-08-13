@@ -1,18 +1,22 @@
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
+import { useParams } from 'react-router-dom';
 import { Context, IContext } from '..';
 import { VMFooter } from '../components/UI/footer/VMFooter';
 import { Header } from '../components/UI/header/Header';
 import { ProductGrid } from '../components/UI/productGrid/ProductGrid';
-import { getAllCategories, getOptionsByCategorySlug } from '../http/productAPI';
+import { getAllCategories, getOneCategory, getOptionsByCategorySlug } from '../http/productAPI';
 import { ICategory, ICategoryOptions, IProduct, IProductOptions } from '../store/ProductStore';
 
 export interface ICatalogProps {
 }
 
 
-export function Catalog(props: ICatalogProps) {
+export const Catalog = observer((props: ICatalogProps) => {
 
   const [catsOptions, setCatsOptions] = React.useState<ICategoryOptions[]>([])
+
+  const { catalog_slug } = useParams()
 
   const { productData } = React.useContext(Context) as IContext
 
@@ -20,17 +24,27 @@ export function Catalog(props: ICatalogProps) {
     (async () => {
       setCatsOptions([])
 
-      if (productData.categories.length === 0){
-        const cats = await getAllCategories();
-        productData.setCategories(cats)
-        console.log("GET CATS")
-      }
-      
+      if (catalog_slug) {
+        const cat = await getOneCategory(catalog_slug);
+        productData.setCategory(cat)
 
-      productData.categories.map(async (cat) => {
         const data = await getOptionsByCategorySlug(cat.category_slug)
         setCatsOptions(catsOptions => [...catsOptions, { ...cat, ProductOptions: data }])
-      })
+
+      } else {
+        const cats = await getAllCategories();
+        productData.setCategories(cats)
+
+        productData.categories.map(async (cat) => {
+          const data = await getOptionsByCategorySlug(cat.category_slug)
+          setCatsOptions(catsOptions => [...catsOptions, { ...cat, ProductOptions: data }])
+        })
+      }
+
+      console.log("GET CATS")
+
+
+
     })();
 
   }, []);
@@ -54,4 +68,4 @@ export function Catalog(props: ICatalogProps) {
       <VMFooter />
     </div>
   );
-}
+})

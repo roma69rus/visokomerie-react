@@ -10,6 +10,7 @@ import { CreateSliderModal } from './CreateSliderModal';
 import { IProduct, IProductOptions, IProductOptionsImages } from '../../../store/ProductStore';
 import { CreatePOModal } from './CreatePOModal';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { getAllProducts, getOptionsByProductName, getOptionsByProductNameAndImages } from '../../../http/productAPI';
 
 
 
@@ -19,13 +20,21 @@ export interface IAdmProductOptions {
 export function AdmProductOptions(props: IAdmProductOptions) {
 
   const { productData } = React.useContext(Context) as IContext
-  const prods: IProduct[] = JSON.parse(JSON.stringify(productData.allProducts))
-  const prod: IProduct = JSON.parse(JSON.stringify(productData.productWithOneOption))
-  const inputs: Array<IProductOptions> = prod.ProductOptions as Array<IProductOptions>;
-  console.log(inputs);
 
   const [modalShow, setModalShow] = React.useState(false);
   const [productNameID, setProductNameID] = React.useState(0);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    getAllProducts().then((data) => {
+      setIsLoading(true);
+      productData.setAllProducts(data)
+    }).finally(() => {
+      setIsLoading(false)
+    })
+
+
+  }, [productNameID])
 
   return (
     <div>
@@ -36,11 +45,24 @@ export function AdmProductOptions(props: IAdmProductOptions) {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          {prods.map((i) => {
+          {(productData.allProducts || []).map((i) => {
             return (
               <Dropdown.Item
-                onClick={() => setProductNameID(i.id as number)}
-              >{i.name}
+                onClick={() => {
+                  
+                  
+                  getOptionsByProductNameAndImages(i.product_slug).then((data) => {
+                    setIsLoading(true)
+                    setProductNameID(i.id as number)
+                    productData.setProductWithOptions(data)
+                    
+                  }).finally(()=> {
+                    setIsLoading(false)
+                  })
+
+                }}
+              >
+                {i.name}
               </Dropdown.Item>
             )
           })}
@@ -48,15 +70,15 @@ export function AdmProductOptions(props: IAdmProductOptions) {
         </Dropdown.Menu>
       </Dropdown>
 
-      {productNameID
+      {!isLoading && productNameID
         ? <>
-          <h2>{prod.name}</h2>
+          <h2>{productData.productWithOptions?.name}</h2>
           <div className="d-grid gap-2">
             <Button variant="primary" size="lg" onClick={() => setModalShow(true)}>
               Создать опцию
             </Button>
           </div>
-          {inputs?.map((po) => {
+          {productData.productWithOptions?.ProductOptions.map((po) => {
             return (
               <Row className='mt-4' key={po.id}>
                 <Col md={6}>
@@ -118,7 +140,7 @@ export function AdmProductOptions(props: IAdmProductOptions) {
                   {(po.ProductOptionsImages as IProductOptionsImages[]).map((item) => {
                     return (
                       <Col md={3} className="d-flex flex-column justify-content-center">
-                        <Image src={item.img_path} style={{ maxWidth: "100%", width: "auto", height: '200px', objectFit: "cover" }} />
+                        <Image src={process.env.REACT_APP_API_URL + '/' + item.img_path} style={{ maxWidth: "100%", width: "auto", height: '200px', objectFit: "cover" }} />
                         <Form.Check
                           className='PO'
                           style={{ margin: "8px 0 8px 0" }}

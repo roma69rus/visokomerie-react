@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import { Image, Row, Col } from 'react-bootstrap';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { CreateSliderModal } from './CreateSliderModal';
+import { getSlider } from '../../../http/sliderAPI';
 
 
 export interface IAdmSliderProps {
@@ -15,8 +16,8 @@ export interface IAdmSliderProps {
 export function AdmSlider(props: IAdmSliderProps) {
 
   const { sliderData } = React.useContext(Context) as IContext
-  const inputs: Array<ISlider> | null = JSON.parse(JSON.stringify(sliderData.slider))
-  console.log(inputs);
+
+
 
   const [modalShow, setModalShow] = React.useState(false);
 
@@ -28,11 +29,11 @@ export function AdmSlider(props: IAdmSliderProps) {
           Создать слайд
         </Button>
       </div>
-      {inputs?.map((slide) => {
+      {(sliderData.slider || []).map((slide) => {
         return (
           <Row className='mt-4' key={slide.id}>
             <Col md={2} className="d-flex justify-content-center">
-              <Image src={slide.img_path} style={{ maxWidth: "100%", width: "auto", height: '200px', objectFit: "cover" }} />
+              <Image src={process.env.REACT_APP_API_URL + '/' + slide.img_path} style={{ maxWidth: "100%", width: "auto", height: '200px', objectFit: "cover" }} />
             </Col>
             <Col md={6}>
               <Form>
@@ -41,6 +42,8 @@ export function AdmSlider(props: IAdmSliderProps) {
                   id="custom-switch"
                   label="IsVideo"
                   checked={slide.isVideo || false}
+                  onChange = {()=> {}}
+                  onClick = {()=>{}}
                 />
                 <Form.Group controlId="formFileSm" className="mb-3">
                   <Form.Control type="file" size="sm" />
@@ -51,6 +54,7 @@ export function AdmSlider(props: IAdmSliderProps) {
                     aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm"
                     value={slide.url as string}
+                    onChange = {()=> {}}
                   />
                 </InputGroup>
                 <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
@@ -59,6 +63,7 @@ export function AdmSlider(props: IAdmSliderProps) {
                     aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm"
                     value={slide.btn_text as string}
+                    onChange = {()=> {}}
                   />
                 </InputGroup>
                 <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
@@ -67,6 +72,7 @@ export function AdmSlider(props: IAdmSliderProps) {
                     aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm"
                     value={slide.btn_text as string}
+                    onChange = {()=> {}}
                   />
                 </InputGroup>
                 <Button variant="success" type="submit" className='mb-2'>

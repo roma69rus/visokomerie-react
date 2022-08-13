@@ -10,7 +10,7 @@ export const createSlide = async (slide: ISlider) => {
 }
 
 export const getSlider = async () => {
-    const {data} = await $host.get('api/slider')
+    const {data} = await $host.get<ISlider[]>('api/slider')
     return data
 }
 

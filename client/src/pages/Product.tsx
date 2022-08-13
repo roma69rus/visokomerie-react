@@ -25,7 +25,7 @@ export const Product = observer((props: IProductProps) => {
     getOneProduct(product_slug as string, color).then((data) => {
       productData.setProductWithOneOption(data) 
 
-      console.log(productData.productWithOneOption) 
+      console.log("productData.productWithOneOption", productData.productWithOneOption) 
     }) 
 
   }, []);    
@@ -36,12 +36,12 @@ export const Product = observer((props: IProductProps) => {
       <Header />
       <section className='product'>
         <div className='container product__container'>
-          {/* <VMSwiper
-            images={productData.productWithOneOption?.ProductOptions[0].ProductOptionsImages} 
-          /> */}
+          <VMSwiper
+            images={productData.productWithOneOption?.ProductOptions[0]?.ProductOptionsImages as IProductOptionsImages[]} 
+          />
         </div>
       </section>
-      <ProductInfoSection /> 
+      <ProductInfoSection/> 
       <VMFooter />
     </div>
   );

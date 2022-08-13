@@ -6,6 +6,7 @@ import {IProductInput, Product} from              '../models/product'
 import {IImagesInput, ProductOptionsImages} from  '../models/product_images'
 import {ICategoryInput, Category} from          '../models/product_category'
 import ApiError from                              '../error/ApiError';
+import {Op} from 'sequelize'
 
 
 
@@ -105,17 +106,17 @@ class productService {
   async getAllProducts():Promise<any>{
 
     const products = await Product.findAll()    
-    const result:any = {};
+    // const result:any = {};
 
-    for (let i = 0; i < products.length; i++) {
-      result[products[i]['id']] = products[i]
-    }
+    // for (let i = 0; i < products.length; i++) {
+    //   result[products[i]['id']] = products[i]
+    // }
 
-    return result
+    return products
       
   }
 
-  async getOptionsByProductName(product_slug:string, color:any, page:number, limit:number):Promise<any> {
+  async getOptionsByProductName(product_slug:string, color:any, getAllimages: boolean, page:number, limit:number):Promise<any> {
     
     limit = limit || 100;   //по умолчанию 100 элементов на странице
     page = page || 1        //по умолчанию первая страница
@@ -126,6 +127,10 @@ class productService {
     
     let result: any = {};
 
+    let arrayofBool: Array<boolean> = [true];
+
+    getAllimages ? arrayofBool.push(false) : arrayofBool
+
     if (!color) {
       const productOpt = await Product.findOne({
         where: {product_slug: product_slug}, 
@@ -133,9 +138,13 @@ class productService {
           model: ProductOptions,
           include : [{
             model: ProductOptionsImages,
-            where: {main_image: true},
+            where: {main_image: {
+              [Op.in]: arrayofBool
+            }},
             required: false,
           }],
+        },{
+          model: Category
         }],
         limit,
         offset
@@ -166,6 +175,8 @@ class productService {
             model: ProductOptionsImages,          
             required: true
           }],
+        },{
+          model: Category
         }],
         limit,
         offset

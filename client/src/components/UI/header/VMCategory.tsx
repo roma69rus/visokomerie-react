@@ -13,7 +13,8 @@ export interface IVMCategoryProps {
 export function VMCategory(props: IVMCategoryProps) {
   const navigate = useNavigate();
   const navigateTo = (path: string) => {
-    setTimeout(() => navigate(path), 400)
+    navigate(path)
+    navigate(0)
   };
 
   const { productData } = React.useContext(Context) as IContext
@@ -42,7 +43,7 @@ export function VMCategory(props: IVMCategoryProps) {
           return (
             <Dropdown.Item
               key={cat.id}
-            // value={cat.name}
+              onClick={() => navigateTo(CATALOG_ROUTE + '/' + cat.category_slug)}
             >
               {cat.name}
             </Dropdown.Item>
