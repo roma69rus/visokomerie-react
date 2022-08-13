@@ -5,6 +5,7 @@ import { CATALOG_ROUTE } from '../../../utils/consts';
 import { Context, IContext } from '../../..';
 import { ListGroup } from 'react-bootstrap';
 import { ICategory, IProduct, IProductStore } from '../../../store/ProductStore';
+import { getAllCategories } from '../../../http/productAPI';
 
 export interface IVMCategoryProps {
 }
@@ -16,9 +17,19 @@ export function VMCategory(props: IVMCategoryProps) {
   };
 
   const { productData } = React.useContext(Context) as IContext
-  
-  const categories: ICategory[] = [...JSON.parse(JSON.stringify(productData.categories))]
-  console.log("categories", categories)
+
+
+  // const cats = await getAllCategories();
+  //       productData.setCategories(cats)
+  React.useEffect(() => {
+    (async () => {
+      if (productData.categories.length === 0) {
+        const cats = await getAllCategories()
+        productData.setCategories(cats)
+        console.log("GET CATS")
+      }
+    })()
+  }, [])
 
   return (
     <Dropdown text='Каталог' pointing className='link item' style={{ color: "white", marginRight: "10px" }}>
@@ -27,19 +38,16 @@ export function VMCategory(props: IVMCategoryProps) {
         <Dropdown.Divider />
         <Dropdown.Item onClick={() => navigateTo(CATALOG_ROUTE)}>Все категории</Dropdown.Item>
         <Dropdown.Divider />
-        {categories.map((cat) => {
+        {productData.categories.map((cat) => {
           return (
-            <Dropdown.Item 
+            <Dropdown.Item
               key={cat.id}
-              // value={cat.name}
+            // value={cat.name}
             >
               {cat.name}
             </Dropdown.Item>
           )
-        })} 
-        {/* <Dropdown.Item>Брюки</Dropdown.Item>
-        <Dropdown.Item>Рубашки</Dropdown.Item>
-        <Dropdown.Item>Костюмы</Dropdown.Item> */}
+        })}        
       </Dropdown.Menu>
     </Dropdown>
   );

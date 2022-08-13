@@ -9,7 +9,6 @@ export interface IAppRouterProps {
 
 export function AppRouter(props: IAppRouterProps) {
   const {userData} = React.useContext(Context) as IContext
-  console.log(userData)
   return (
     <Routes>
       {userData.isAuth && authRoutes.map(({ path, Component }) =>

@@ -20,7 +20,7 @@ export function AdmProductOptions(props: IAdmProductOptions) {
 
   const { productData } = React.useContext(Context) as IContext
   const prods: IProduct[] = JSON.parse(JSON.stringify(productData.allProducts))
-  const prod: IProduct = JSON.parse(JSON.stringify(productData.oneProductOption))
+  const prod: IProduct = JSON.parse(JSON.stringify(productData.productWithOneOption))
   const inputs: Array<IProductOptions> = prod.ProductOptions as Array<IProductOptions>;
   console.log(inputs);
 

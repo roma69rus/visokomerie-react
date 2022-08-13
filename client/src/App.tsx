@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { AppRouter } from './components/AppRouter'
-import { Header } from './components/UI/header/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/style.css'
 import './css/media-1024.css'
@@ -22,16 +21,28 @@ const App = observer(() => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    check().then(data => {
-      userData.setUser(JSON.parse(JSON.stringify(data)))
-      userData.setIsAuth(true)
-    }).finally(()=> setLoading(false))
+    if (localStorage.getItem('token')) {
+      check()
+        .then(data => {
+          userData.setUser(JSON.parse(JSON.stringify(data)))
+          userData.setIsAuth(true)
+          console.log("CHECK DATA", data)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+        .finally(() => setLoading(false))
+    } else {
+      setLoading(false)
+      userData.setUser({})
+      userData.setIsAuth(false)
+    }
   }, [])
 
   if (loading) {
-    return <Spinner animation={"grow"}/>
+    return <Spinner animation={"grow"} />
   }
-  console.log(userData)
+
   return (
     <BrowserRouter>
       <AppRouter />

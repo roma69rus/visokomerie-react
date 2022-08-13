@@ -144,22 +144,34 @@ class productService {
     }
 
     if (color) {
+      // const options = await ProductOptions.findAll({
+      //   where: {options_slug: color},
+      //   include: [{
+      //     model: Product,
+      //     required: true,
+      //     where: {product_slug: product_slug}
+      //   }, {
+      //     model: ProductOptionsImages,
+      //   }]
+      // })
+
 
       const productOpt = await Product.findOne({
         where: {product_slug: product_slug}, 
         include: [{
           model: ProductOptions,
+          required: true,
           where: {options_slug: color},
           include : [{
-            model: ProductOptionsImages,
-            where: {main_image: true},
-            required: false
+            model: ProductOptionsImages,          
+            required: true
           }],
         }],
         limit,
         offset
       });
-      result = productOpt;
+
+      result = productOpt;      
     }
     return result;   
   } 

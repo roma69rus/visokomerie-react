@@ -20,7 +20,7 @@ export function AdmProductToCategory(props: IAdmProductToCategory) {
 
   const { productData } = React.useContext(Context) as IContext
   const prods: IProduct[] = JSON.parse(JSON.stringify(productData.allProducts))
-  const prod: IProduct = JSON.parse(JSON.stringify(productData.oneProductOption))
+  const prod: IProduct = JSON.parse(JSON.stringify(productData.productWithOneOption))
   const inputs: Array<ICategory> = prod.Categories as Array<ICategory>;
   const allCategories: ICategory[] = JSON.parse(JSON.stringify(productData.categories))
   console.log(inputs);

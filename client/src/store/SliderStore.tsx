@@ -8,6 +8,9 @@ export interface ISlider {
   btn_text: string | null;
   isVideo: boolean | null;
   slide_order: number | null;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null
 }
 
 
@@ -25,18 +28,13 @@ export default class SliderStore implements ISliderStore {
           "img_path": "d75faa1b-517f-4a99-a26a-bcb43c596589.jpg",
           "url": "1234",
           "btn_text": null,
-          "isVideo": false,
-          "slide_order": null,
-      },
-      {
-          "id": 2,
-          "img_path": "d75faa1b-517f-4a99-a26a-bcb43c596589.jpg",
-          "url": "1234",
-          "btn_text": null,
           "isVideo": true,
           "slide_order": null,
+          "createdAt": "2022-07-19T10:39:49.492Z",
+          "updatedAt": "2022-07-19T10:39:49.492Z",
+          "deletedAt": null
       }
-    ]
+  ]
     makeAutoObservable(this)
   }
 

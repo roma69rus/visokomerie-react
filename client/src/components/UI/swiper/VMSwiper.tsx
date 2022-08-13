@@ -8,11 +8,13 @@ import 'swiper/css';
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import "swiper/css/pagination";
+import { IProductOptionsImages } from '../../../store/ProductStore';
 
 export interface IVMSwiperProps {
+  images: IProductOptionsImages[]
 }
 
-export function VMSwiper(props: IVMSwiperProps) {
+export function VMSwiper({ images }: IVMSwiperProps) {
   return (
     <Swiper
       slidesPerView={"auto"}
@@ -24,15 +26,13 @@ export function VMSwiper(props: IVMSwiperProps) {
       modules={[Pagination, Navigation]}
       className="mySwiper"
     >
-      <SwiperSlide> <img src='./1_black_palaco.jpg' style={{width: "100%"}}/> </SwiperSlide>
-      <SwiperSlide> <img src='./1_black_palaco.jpg'/> </SwiperSlide>
-      <SwiperSlide> <img src='./1_black_palaco.jpg'/> </SwiperSlide>
-      <SwiperSlide> <img src='./1_black_palaco.jpg'/> </SwiperSlide>
-      <SwiperSlide> <img src='./1_black_palaco.jpg'/> </SwiperSlide>
-      <SwiperSlide> <img src='./1_black_palaco.jpg'/> </SwiperSlide>
-      <SwiperSlide> <img src='./1_black_palaco.jpg'/> </SwiperSlide>
-      <SwiperSlide> <img src='./1_black_palaco.jpg'/> </SwiperSlide>
-      <SwiperSlide> <img src='./1_black_palaco.jpg'/> </SwiperSlide>
+      {images && images.map(image => {
+        return (
+          <SwiperSlide key={image.id}>
+            <img src={process.env.REACT_APP_API_URL + '/' + image.img_path}/>
+          </SwiperSlide>
+        )
+      })}
     </Swiper>
   );
 }

@@ -12,4 +12,18 @@ export const getProducts = async (product_slug: string | null, color: string | n
     const {data} = await $host.get('api/products')
     return data
 }
+export const getOneProduct = async (product_slug: string | null, color: string | null) => {
+    const {data} = await $host.get('api/products/' + product_slug + '?color=' + color)
+    return data
+}
 
+export const getOptionsByCategorySlug = async (category_slug: string) => {
+    const {data} = await $host.get('api/category/'+ category_slug +'/options')
+    return data
+}
+
+
+export const getAllCategories = async () => {
+    const {data} = await $host.get('api/category/')
+    return data
+}
