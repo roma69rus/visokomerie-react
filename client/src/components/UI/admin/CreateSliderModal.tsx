@@ -10,11 +10,17 @@ export interface ICreateSliderModalProps {
 }
 
 export function CreateSliderModal(props: ICreateSliderModalProps) {
+ 
+  const addProduct = () => {
+    
+  }
+ 
   return (
     <DefaultCreateModal
       show={props.show}
       onHide={props.onHide}
       title='Create slide'
+      onSave={addProduct}
     >
       <Form>
         <Form.Check

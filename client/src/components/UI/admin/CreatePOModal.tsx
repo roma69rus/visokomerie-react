@@ -10,59 +10,66 @@ export interface ICreatePOModalProps {
 }
 
 export function CreatePOModal(props: ICreatePOModalProps) {
+
+  const addProduct = () => {
+
+  }
+
   return (
     <DefaultCreateModal
       show={props.show}
       onHide={props.onHide}
       title='Create slide'
+      onSave={addProduct}
+
     >
       <Form>
-                <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
-                  <InputGroup.Text id="inputGroup-sizing-sm">COLOR</InputGroup.Text>
-                  <Form.Control
-                    aria-label="Small"
-                    aria-describedby="inputGroup-sizing-sm"
-                  />
-                </InputGroup>
+        <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
+          <InputGroup.Text id="inputGroup-sizing-sm">COLOR</InputGroup.Text>
+          <Form.Control
+            aria-label="Small"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+        </InputGroup>
 
-                <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
-                  <InputGroup.Text id="inputGroup-sizing-sm">Description</InputGroup.Text>
-                  <Form.Control
-                    aria-label="Small"
-                    aria-describedby="inputGroup-sizing-sm"
-                  />
-                </InputGroup>
+        <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
+          <InputGroup.Text id="inputGroup-sizing-sm">Description</InputGroup.Text>
+          <Form.Control
+            aria-label="Small"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+        </InputGroup>
 
-                <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
-                  <InputGroup.Text id="inputGroup-sizing-sm">PRICE INCREASE</InputGroup.Text>
-                  <Form.Control
-                    aria-label="Small"
-                    aria-describedby="inputGroup-sizing-sm"
-                  />
-                </InputGroup>
+        <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
+          <InputGroup.Text id="inputGroup-sizing-sm">PRICE INCREASE</InputGroup.Text>
+          <Form.Control
+            aria-label="Small"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+        </InputGroup>
 
-                <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
-                  <InputGroup.Text id="inputGroup-sizing-sm">OPTION SLUG</InputGroup.Text>
-                  <Form.Control
-                    aria-label="Small"
-                    aria-describedby="inputGroup-sizing-sm"
-                  />
-                </InputGroup>
+        <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
+          <InputGroup.Text id="inputGroup-sizing-sm">OPTION SLUG</InputGroup.Text>
+          <Form.Control
+            aria-label="Small"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+        </InputGroup>
 
-                <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
-                  <InputGroup.Text id="inputGroup-sizing-sm">OPTION ORDER</InputGroup.Text>
-                  <Form.Control
-                    aria-label="Small"
-                    aria-describedby="inputGroup-sizing-sm"
-                  />
-                </InputGroup>
-                <Form.Group controlId="formFileSm" className="mb-3">
-                  <Form.Control type="file" size="sm" multiple />
-                </Form.Group>
-                {/* <Button variant="primary" type="submit">
+        <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
+          <InputGroup.Text id="inputGroup-sizing-sm">OPTION ORDER</InputGroup.Text>
+          <Form.Control
+            aria-label="Small"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+        </InputGroup>
+        <Form.Group controlId="formFileSm" className="mb-3">
+          <Form.Control type="file" size="sm" multiple />
+        </Form.Group>
+        {/* <Button variant="primary" type="submit">
                   Сохранить
                 </Button> */}
-              </Form>
+      </Form>
     </DefaultCreateModal>
   );
 }

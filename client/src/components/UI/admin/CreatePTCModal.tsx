@@ -17,16 +17,22 @@ export interface ICreatePTCModalProps {
 export function CreatePTCModal(props: ICreatePTCModalProps) {
 
   const [newCat, setNewCat] = React.useState<ICategory | null>(null)
-  
+
   React.useEffect(() => {
     // console.log(newCat)
-  }, [newCat]) 
+  }, [newCat])
+
+  const addProduct = () => {
+
+  }
 
   return (
     <DefaultCreateModal
       show={props.show}
       onHide={props.onHide}
       title='Create slide'
+      onSave={addProduct}
+
     >
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic" className='mb-3'>
@@ -39,10 +45,10 @@ export function CreatePTCModal(props: ICreatePTCModalProps) {
               <Dropdown.Item
                 key={i.id}
                 // onClick={() => setNewCat(i)}
-                onClick={()=> {
+                onClick={() => {
                   // props.addCat(i as ICategory)
                   setNewCat(i)
-                  
+
                 }}
               >{i.name}
               </Dropdown.Item>
@@ -53,8 +59,8 @@ export function CreatePTCModal(props: ICreatePTCModalProps) {
       <Button
         variant="success"
         type="submit"
-        onClick={()=> props.addCat(newCat as ICategory)}
-        >
+        onClick={() => props.addCat(newCat as ICategory)}
+      >
         Сохранить
       </Button>
     </DefaultCreateModal>

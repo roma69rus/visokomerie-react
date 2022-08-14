@@ -48,9 +48,7 @@ export function AdmProductOptions(props: IAdmProductOptions) {
           {(productData.allProducts || []).map((i) => {
             return (
               <Dropdown.Item
-                onClick={() => {
-                  
-                  
+                onClick={() => {                    
                   getOptionsByProductNameAndImages(i.product_slug).then((data) => {
                     setIsLoading(true)
                     setProductNameID(i.id as number)
@@ -59,7 +57,6 @@ export function AdmProductOptions(props: IAdmProductOptions) {
                   }).finally(()=> {
                     setIsLoading(false) 
                   })
-
                 }}
               >
                 {i.name}

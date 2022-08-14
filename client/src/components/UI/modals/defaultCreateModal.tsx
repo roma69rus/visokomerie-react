@@ -7,6 +7,7 @@ export interface IDefaultCreateModalProps {
   show: boolean;
   title: string;
   children: any | null;
+  onSave: () => void;
 }
 
 export function DefaultCreateModal(props: IDefaultCreateModalProps) {
@@ -27,7 +28,7 @@ export function DefaultCreateModal(props: IDefaultCreateModalProps) {
         {props.children}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="success">Save</Button>
+        <Button variant="success" onClick={props.onSave}>Save</Button>
         <Button variant="danger" onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>

@@ -2,8 +2,18 @@ import { $authHost, $host } from ".";
 import jwt_decode from "jwt-decode"
 import { ICategory, IProduct, IProductOptions } from "../store/ProductStore";
 
-export const createProduct = async (product: IProduct) => {
-    const {data} = await $host.post<IProduct>('api/products', product)
+export interface IProductCreate {
+    name: string,
+    description?: string | null,
+    price: number,
+    product_slug: string,
+    sizetable_path?: string | null,
+    categoryId: number;     
+  }
+
+
+export const createProduct = async (product: IProductCreate) => {
+    const {data} = await $authHost.post<IProduct>('api/products', product)
     console.log(data)
     return data
 }
