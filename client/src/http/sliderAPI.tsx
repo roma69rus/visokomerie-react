@@ -1,10 +1,9 @@
 import { $authHost, $host } from ".";
 import jwt_decode from "jwt-decode"
-import { IProduct } from "../store/ProductStore";
-import { ISlider } from "../store/SliderStore";
+import { ISlider, ISliderCreate } from "../types/sliderTypes";
 
-export const createSlide = async (slide: ISlider) => {
-    const {data} = await $authHost.post('api/slider', slide)
+export const createSlide = async (slide: FormData) => {
+    const {data} = await $authHost.post<ISlider>('api/slider', slide)
     console.log(data)
     return data
 }

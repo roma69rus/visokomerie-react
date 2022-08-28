@@ -1,0 +1,43 @@
+Folder PATH listing
+Volume serial number is CE15-C9AC
+C:.
+   
++---client
+|   +---build       
+|   +---node_modules     
+|   \---src
+|       |   App.tsx
+|       |   index.tsx
+|       |   routes.tsx
+|       |   
+|       +---components
+|       |   |   AppRouter.tsx   
+|       |   |---UI
+|       |       +---admin    
+|       |       +---card    
+|       |       +---cart     
+|       |       +---footer     
+|       |       +---header    
+|       |       +---hero     
+|       |       +---modals    
+|       |       +---product      
+|       |       +---productGrid    
+|       |       +---swiper          
+|       +---css
+|       +---http   
+|       +---pages     
+|       +---store     
+|       +---types    
+|       +---utils            
+\---server
+    |   vm.db
+    +---controllers
+    +---error   
+    +---middleware   
+    +---models    
+    +---node_modules                 
+    +---routes      
+    +---services   
+    +---static
+           
+            

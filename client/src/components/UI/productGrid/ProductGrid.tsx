@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Context, IContext } from '../../..';
-import { IProduct, IProductOptions } from '../../../store/ProductStore';
+import { IProductOptions } from '../../../types/productOptionsTypes';
+import { IProduct } from '../../../types/productTypes';
 import { VMCard } from '../card/VMCard';
 export interface IProductGridProps {
   productsOptions: IProductOptions[]
@@ -22,8 +23,8 @@ export function ProductGrid({ productsOptions }: IProductGridProps) {
               style={{ maxWidth: "300px", }}>
               <VMCard
                 product_id={opt.Product!.id}
-                name={(opt.Product as IProduct).name}
-                price={(opt.Product as IProduct).price} 
+                name={opt.Product!.name}
+                price={opt.Product!.price} 
                 product_slug={(opt.Product as IProduct).product_slug}
                 product_option_id={opt.id}
                 product_option_description={opt.description}

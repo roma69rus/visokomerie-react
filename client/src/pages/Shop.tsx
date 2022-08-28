@@ -6,7 +6,6 @@ import { Header } from '../components/UI/header/Header';
 import { Hero } from '../components/UI/hero/Hero';
 import { ProductGrid } from '../components/UI/productGrid/ProductGrid';
 import { getMainPageOptions } from '../http/productAPI';
-import { IProductOptions } from '../store/ProductStore';
 import {getSlider} from '../http/sliderAPI'
 
 export interface IShopProps {

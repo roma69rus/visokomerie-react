@@ -1,59 +1,59 @@
 import { $authHost, $host } from ".";
 import jwt_decode from "jwt-decode"
-import { ICategory, IProduct, IProductOptions } from "../store/ProductStore";
+import { IProduct, IProductCreate } from "../types/productTypes";
+import { IProductOptionCreate, IProductOptions } from "../types/productOptionsTypes";
+import { ICategory } from "../types/categoryTypes";
 
-export interface IProductCreate {
-    name: string,
-    description?: string | null,
-    price: number,
-    product_slug: string,
-    sizetable_path?: string | null,
-    categoryId: number;     
-  }
 
 
 export const createProduct = async (product: IProductCreate) => {
-    const {data} = await $authHost.post<IProduct>('api/products', product)
+    const { data } = await $authHost.post<IProduct>('api/products', product)
+    console.log(data)
+    return data
+}
+
+export const createProductOption = async (product: FormData) => {
+    const { data } = await $authHost.post<IProductOptions>('api/products/options', product)
     console.log(data)
     return data
 }
 
 export const getAllProducts = async () => {
-    const {data} = await $host.get<IProduct[]>('api/products/')
+    const { data } = await $host.get<IProduct[]>('api/products/')
     return data
 }
 export const getOneProduct = async (product_slug: string | null, color: string | null) => {
-    const {data} = await $host.get<IProduct>('api/products/' + product_slug + '?color=' + color)
+    const { data } = await $host.get<IProduct>('api/products/' + product_slug + '?color=' + color)
     return data
 }
 
 export const getOptionsByCategorySlug = async (category_slug: string) => {
-    const {data} = await $host.get<IProductOptions[]>('api/category/'+ category_slug +'/options')
+    const { data } = await $host.get<IProductOptions[]>('api/category/' + category_slug + '/options')
     return data
 }
 
 
 export const getAllCategories = async () => {
-    const {data} = await $host.get<ICategory[]>('api/category/')
+    const { data } = await $host.get<ICategory[]>('api/category/')
     return data
 }
 
 export const getOneCategory = async (catalog_slug: string) => {
-    const {data} = await $host.get<ICategory>('api/category/' + catalog_slug)
-    console.log("getOneCategory",  data)
+    const { data } = await $host.get<ICategory>('api/category/' + catalog_slug)
+    console.log("getOneCategory", data)
     return data
 }
 
 export const getMainPageOptions = async () => {
-    const {data} = await $host.get<IProductOptions[]>('api/products/options')
+    const { data } = await $host.get<IProductOptions[]>('api/products/options')
     return data
 }
 
 export const getOptionsByProductName = async (product_slug: string) => {
-    const {data} = await $host.get<IProduct>('api/products/' + product_slug)
+    const { data } = await $host.get<IProduct>('api/products/' + product_slug)
     return data
 }
 export const getOptionsByProductNameAndImages = async (product_slug: string) => {
-    const {data} = await $host.get<IProduct>('api/products/' + product_slug + "?getAllImages=true")
+    const { data } = await $host.get<IProduct>('api/products/' + product_slug + "?getAllImages=true")
     return data
 }

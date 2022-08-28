@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Context, IContext } from '../../..';
-import { IProductOptionsImages } from '../../../store/ProductStore';
-import { ISlider } from '../../../store/SliderStore';
+import { ISlider } from '../../../types/sliderTypes';
 import { VMSwiper } from '../swiper/VMSwiper';
 
 export interface IHeroProps {

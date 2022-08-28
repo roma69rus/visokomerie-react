@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ISlider } from '../../../store/SliderStore';
 import { Context } from '../../..';
 import { IContext } from '../../..';
 import Button from 'react-bootstrap/Button';
@@ -7,7 +6,6 @@ import Form from 'react-bootstrap/Form';
 import { Image, Row, Col } from 'react-bootstrap';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { CreateSliderModal } from './CreateSliderModal';
-import { ICategory } from '../../../store/ProductStore';
 
 
 export interface IAdmCategoriesProps {
@@ -40,7 +38,7 @@ export function AdmCategories(props: IAdmCategoriesProps) {
                     aria-describedby="inputGroup-sizing-sm"
                     value={cat.name as string}
                     onChange = {()=> {}}
-                  />
+                  /> 
                 </InputGroup>
                 <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
                   <InputGroup.Text id="inputGroup-sizing-sm">Description</InputGroup.Text>

@@ -3,7 +3,7 @@ import { DefaultCreateModal } from '../modals/defaultCreateModal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { InputGroup } from 'react-bootstrap';
-import { createProduct, IProductCreate } from '../../../http/productAPI';
+import { createProduct } from '../../../http/productAPI';
 import { useState } from 'react';
 
 export interface ICreateProductModalProps {
@@ -47,7 +47,7 @@ export function CreateProductModal(props: ICreateProductModalProps) {
             aria-label="Small"
             aria-describedby="inputGroup-sizing-sm"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
           />
         </InputGroup>
         <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
@@ -56,7 +56,7 @@ export function CreateProductModal(props: ICreateProductModalProps) {
             aria-label="Small"
             aria-describedby="inputGroup-sizing-sm"
             value={desc}
-            onChange={(e) => setDesc(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDesc(e.target.value)}
           />
         </InputGroup>
         <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
@@ -65,7 +65,7 @@ export function CreateProductModal(props: ICreateProductModalProps) {
             aria-label="Small"
             aria-describedby="inputGroup-sizing-sm"
             value={price as number}
-            onChange={(e) => setPrice(Number(e.target.value))}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPrice(Number(e.target.value))}
           />
         </InputGroup>
         <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
@@ -74,7 +74,7 @@ export function CreateProductModal(props: ICreateProductModalProps) {
             aria-label="Small"
             aria-describedby="inputGroup-sizing-sm"
             value={product_slug}
-            onChange={(e) => setProduct_slug(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProduct_slug(e.target.value)}
           />
         </InputGroup>
         <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
@@ -83,7 +83,7 @@ export function CreateProductModal(props: ICreateProductModalProps) {
             aria-label="Small"
             aria-describedby="inputGroup-sizing-sm"
             value={sizetable}
-            onChange={(e) => setSizetable(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSizetable(e.target.value)}
           />
         </InputGroup>
         <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
@@ -92,7 +92,7 @@ export function CreateProductModal(props: ICreateProductModalProps) {
             aria-label="Small"
             aria-describedby="inputGroup-sizing-sm"
             value={categoryId as number}
-            onChange={(e) => setCategoryId(Number(e.target.value))}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCategoryId(Number(e.target.value))}
           />
         </InputGroup>
       </Form>

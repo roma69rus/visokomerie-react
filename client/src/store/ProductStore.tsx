@@ -1,76 +1,9 @@
 import { timeStamp } from "console";
 import { makeAutoObservable } from "mobx";
 import { Product } from "../pages/Product";
-
-
-export interface IProduct {
-  id: number,
-  name: string,
-  description: string | null,
-  price: number,
-  product_slug: string,
-  sizetable_path: string | null,
-  ProductOptions: Array<IProductOptions>
-  Categories?: ICategory[];
-  sku?: string | number | null;
-  ProductsToCategories?: IProductToCategory;
-  createdAt?: string;
-  updatedAt?: string;
-  deletedAt?: string | null;
-}
-
-export interface ICategory {
-  id: number;
-  name: string;
-  description: string | null;
-  category_slug: string;
-  category_order: number | null;
-  Products?: IProduct[];
-  ProductsToCategories?: IProductToCategory;
-  createdAt?: string;
-  updatedAt?: string;
-  deletedAt?: string | null;
-}
-export interface ICategoryOptions extends ICategory {
-  ProductOptions: IProductOptions[]
-}
-
-export interface IProductToCategory {
-  id: number,
-  productId: number,
-  categoryId: number,
-}
-
-export interface IProductOptions {
-  id: number;
-  description: string | null;
-  product_color: string;
-  price_increase: number;
-  po_order: number | null;
-  options_slug: string;
-  ProductId: number;
-  Product?: IProduct;
-  ProductOptionsImages: Array<IProductOptionsImages>;
-  createdAt?: string;
-  updatedAt?: string;
-  deletedAt?: string | null;
-}
-
-export interface IImage {
-  id: number;
-  img_path: string;
-}
-
-export interface IProductOptionsImages extends IImage {
-  // id: number;
-  // img_path: string;
-  main_image: boolean;
-  ProductOptionId: number;
-  createdAt?: string;
-  updatedAt?: string;
-  deletedAt?: string | null;
-}
-
+import { ICategory, ICategoryOptions } from "../types/categoryTypes";
+import { IProductOptions } from "../types/productOptionsTypes";
+import { IProduct } from "../types/productTypes";
 
 
 export interface IProductStore {

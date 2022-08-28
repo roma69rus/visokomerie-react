@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { ICategory, IProduct, IProductOptions, IProductOptionsImages } from '../../../store/ProductStore';
 import { useNavigate } from 'react-router-dom';
 import { propTypes } from 'react-bootstrap/esm/Image';
+import { IProductOptionsImages } from '../../../types/productOptionsTypes';
 
 export interface IVMCardProps {
   product_id: number,

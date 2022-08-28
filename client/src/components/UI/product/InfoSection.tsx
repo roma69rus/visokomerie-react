@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Dropdown, } from 'semantic-ui-react'
 import { Context, IContext } from '../../..';
-import { ICategory, IProduct, IProductOptions, IProductToCategory } from '../../../store/ProductStore';
 
 export interface IProductInfoSectionProps {
 

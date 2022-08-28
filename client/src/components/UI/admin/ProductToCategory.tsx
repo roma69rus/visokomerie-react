@@ -1,17 +1,14 @@
 import * as React from 'react';
-import { ISlider } from '../../../store/SliderStore';
 import { Context } from '../../..';
 import { IContext } from '../../..';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Image, Row, Col } from 'react-bootstrap';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { CreateSliderModal } from './CreateSliderModal';
-import { ICategory, IProduct, IProductOptions, IProductOptionsImages } from '../../../store/ProductStore';
-import { CreatePOModal } from './CreatePOModal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { CreatePTCModal } from './CreatePTCModal';
 import { getAllProducts, getOptionsByProductName } from '../../../http/productAPI';
+import { ICategory } from '../../../types/categoryTypes';
 
 
 export interface IAdmProductToCategory {

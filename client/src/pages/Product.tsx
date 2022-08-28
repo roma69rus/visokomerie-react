@@ -6,8 +6,8 @@ import { Header } from '../components/UI/header/Header';
 import { ProductInfoSection } from '../components/UI/product/InfoSection';
 import { VMSwiper } from '../components/UI/swiper/VMSwiper';
 import { createProduct, getOneProduct } from '../http/productAPI';
-import { IProduct, IProductOptions, IProductOptionsImages } from '../store/ProductStore';
 import { observer } from 'mobx-react-lite';
+import { IProductOptionsImages } from '../types/productOptionsTypes';
 
 export interface IProductProps {
 }

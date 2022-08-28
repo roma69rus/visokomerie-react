@@ -9,7 +9,7 @@ import { Slider }               from "./models/slider";
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: './vm.db',
+  storage: '../vm.db',
   models: [Product, ProductOptions, User, ProductsToCategories, ProductOptionsImages, Category, Slider],
   logging: console.log,  
 });

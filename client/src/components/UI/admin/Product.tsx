@@ -5,9 +5,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Image, Row, Col } from 'react-bootstrap';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { IProduct } from '../../../store/ProductStore';
 import { CreateProductModal } from './CreateProductModal';
 import { getAllProducts } from '../../../http/productAPI';
+import { IProduct } from '../../../types/productTypes';
 
 
 export interface IAdmProductProps {
@@ -34,6 +34,11 @@ export function AdmProduct(props: IAdmProductProps) {
 
   return (
     <div>
+       <div className="d-grid gap-2">
+        <Button variant="primary" size="lg" onClick={() => setModalShow(true)}>
+          Создать продукт
+        </Button>
+      </div>
       {isLoading ? <h2>Идет загрузка</h2>
       :productData.allProducts.map((prod: IProduct) => {
         return (
@@ -95,11 +100,7 @@ export function AdmProduct(props: IAdmProductProps) {
         )
       })
       }
-      <div className="d-grid gap-2">
-        <Button variant="primary" size="lg" onClick={() => setModalShow(true)}>
-          Создать продукт
-        </Button>
-      </div>
+     
       
       <CreateProductModal
         show={modalShow}

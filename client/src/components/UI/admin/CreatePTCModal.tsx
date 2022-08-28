@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { InputGroup } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { ICategory } from '../../../store/ProductStore';
+import { ICategory } from '../../../types/categoryTypes';
 
 export interface ICreatePTCModalProps {
   onHide: () => void;

@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 
-interface IUserStore {
+export interface IUserStore {
   isAuth: boolean;
   user: any;
 }

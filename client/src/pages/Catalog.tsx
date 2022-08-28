@@ -6,7 +6,7 @@ import { VMFooter } from '../components/UI/footer/VMFooter';
 import { Header } from '../components/UI/header/Header';
 import { ProductGrid } from '../components/UI/productGrid/ProductGrid';
 import { getAllCategories, getOneCategory, getOptionsByCategorySlug } from '../http/productAPI';
-import { ICategory, ICategoryOptions, IProduct, IProductOptions } from '../store/ProductStore';
+import { ICategoryOptions } from '../types/categoryTypes';
 
 export interface ICatalogProps {
 }

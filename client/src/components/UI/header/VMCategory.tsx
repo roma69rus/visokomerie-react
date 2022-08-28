@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { CATALOG_ROUTE } from '../../../utils/consts';
 import { Context, IContext } from '../../..';
 import { ListGroup } from 'react-bootstrap';
-import { ICategory, IProduct, IProductStore } from '../../../store/ProductStore';
 import { getAllCategories } from '../../../http/productAPI';
 
 export interface IVMCategoryProps {

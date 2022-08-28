@@ -3,22 +3,22 @@ import { Container, Form, Button } from 'react-bootstrap';
 import Card from "react-bootstrap/Card"
 import { login } from '../http/userAPI';
 import { observer } from 'mobx-react-lite';
-import { Context } from '..';
-import {useNavigate} from 'react-router-dom'
+import { Context, IContext } from '..';
+import { useNavigate } from 'react-router-dom'
 import { ADMIN_ROUTE, SHOP_ROUTE } from '../utils/consts';
- 
+
 export interface IAuthProps {
 }
 
 export const Auth = observer((props: IAuthProps) => {
 
-  const {userData} = React.useContext(Context) as any
-  const [email, setEmail] = React.useState('')
+  const { userData } = React.useContext(Context) as IContext
+  const [email, setEmail] = React.useState<string>('')
   const [password, setPassword] = React.useState('')
   const navigate = useNavigate()
 
   const signIn = async () => {
-    try{
+    try {
       const response = await login(email, password);
       console.log(response)
       userData.setUser(JSON.parse(JSON.stringify(response)))
@@ -29,7 +29,7 @@ export const Auth = observer((props: IAuthProps) => {
     catch (e) {
       alert(e as string)
     }
-    
+
   }
 
   return (
@@ -71,8 +71,6 @@ export const Auth = observer((props: IAuthProps) => {
   );
 })
 
-// export default{
-//   Auth
-// }
+
 
 

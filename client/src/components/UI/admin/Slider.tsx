@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ISlider } from '../../../store/SliderStore';
 import { Context } from '../../..';
 import { IContext } from '../../..';
 import Button from 'react-bootstrap/Button';
@@ -71,7 +70,7 @@ export function AdmSlider(props: IAdmSliderProps) {
                   <Form.Control
                     aria-label="Small"
                     aria-describedby="inputGroup-sizing-sm"
-                    value={slide.btn_text as string}
+                    value={slide.btn_text as string} 
                     onChange = {()=> {}}
                   />
                 </InputGroup>

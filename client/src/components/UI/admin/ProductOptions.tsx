@@ -1,16 +1,14 @@
 import * as React from 'react';
-import { ISlider } from '../../../store/SliderStore';
 import { Context } from '../../..';
 import { IContext } from '../../..';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Image, Row, Col } from 'react-bootstrap';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { CreateSliderModal } from './CreateSliderModal';
-import { IProduct, IProductOptions, IProductOptionsImages } from '../../../store/ProductStore';
 import { CreatePOModal } from './CreatePOModal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { getAllProducts, getOptionsByProductName, getOptionsByProductNameAndImages } from '../../../http/productAPI';
+import { IProductOptionsImages } from '../../../types/productOptionsTypes';
 
 
 
@@ -158,6 +156,7 @@ export function AdmProductOptions(props: IAdmProductOptions) {
           <CreatePOModal
             show={modalShow}
             onHide={() => setModalShow(false)}
+            ProductId={productNameID}
           />
         </>
         : <h2> Выберете продукт</h2>

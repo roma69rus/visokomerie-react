@@ -2,8 +2,8 @@ import * as React from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from "swiper";
+import { IImage } from '../../../types/productOptionsTypes';
 
-import { IImage, IProductOptionsImages } from '../../../store/ProductStore';
 
 
 
