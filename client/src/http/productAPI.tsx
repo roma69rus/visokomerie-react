@@ -11,9 +11,19 @@ export const createProduct = async (product: IProductCreate) => {
     console.log(data)
     return data
 }
+export const updateProduct = async (product: IProduct) => {
+    const { data } = await $authHost.put<IProduct>('api/products', product)
+    console.log(data)
+    return data
+}
 
 export const createProductOption = async (product: FormData) => {
     const { data } = await $authHost.post<IProductOptions>('api/products/options', product)
+    console.log(data)
+    return data
+}
+export const updateProductOption = async (product: FormData) => {
+    const { data } = await $authHost.put<IProductOptions>('api/products/options', product)
     console.log(data)
     return data
 }

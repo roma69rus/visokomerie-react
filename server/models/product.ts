@@ -5,9 +5,12 @@ import {ProductsToCategories} from './products_to_categories'
 
 
 export interface IProductInput {
+  id?: number;
   name: string;
+  description?: string;
   price: number;
   product_slug: string;
+  sizetable_path?: string;
 }
 
 

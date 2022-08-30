@@ -17,6 +17,7 @@ export interface IAdminProps {
 export const Admin = observer((props: IAdminProps) => {
   const [selectedItem, setSelectedItem] = React.useState('')
 
+
   const { sliderData } = React.useContext(Context) as IContext
   React.useEffect(() => {
     getSlider().then((data) => {

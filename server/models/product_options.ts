@@ -4,10 +4,13 @@ import {Column, Model, Table, ForeignKey, DataType, CreatedAt, UpdatedAt, Delete
 
 
 export interface IOptionsInput {
+  id?: number;
   product_color: string;
   price_increase: number;
   options_slug: string;
   ProductId: number;
+  po_order?: number
+  
 }
 
 @Table({tableName:"product_options", timestamps:true, paranoid: true})

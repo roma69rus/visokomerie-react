@@ -7,6 +7,7 @@ import {IImagesInput, ProductOptionsImages} from  '../models/product_images'
 import {ICategoryInput, Category} from          '../models/product_category'
 import ApiError from                              '../error/ApiError';
 import {Op} from 'sequelize'
+import { json } from 'stream/consumers';
 
 
 
@@ -17,6 +18,11 @@ class productService {
     const createdProduct = await Product.create(product)
 
     return createdProduct;
+  };
+
+  async updateProduct(product:IProductInput): Promise<any> {    
+    await Product.update(product, { where: { id:  product.id} })
+    return await Product.findOne({where: {id:  product.id}}) as Product
   };
 
   async createOptions(options:IOptionsInput, imgs:any): Promise<any> {
@@ -41,6 +47,30 @@ class productService {
     }
 
     return {"product_options": createdOptions, "product_options_images":createdImages};
+  }
+
+  async updateOptions(options:IOptionsInput, imgs:any): Promise<any> {
+   
+    let image = {} as IImagesInput;
+    let createdImages = {} as Array<any>
+
+    await ProductOptions.update(options, {where: {id: options.id}})
+    
+    let main_image:boolean = true;
+    for (let i = 0; i < imgs.length; i++) {
+      const img_path:string = uuidv4() + ".jpg";
+
+      imgs[i].mv(path.resolve(__dirname, '..', 'static', img_path));
+      image = {img_path, main_image, ProductOptionId: options!.id as number}
+
+      // const res = await createdOptions.createProductOptionsImages(image) //не рботает
+      const createdImage = await ProductOptionsImages.create(image)
+      main_image=false;
+
+      createdImages[i] = createdImage;
+    }
+
+    return await ProductOptions.findOne({where: {id:  options.id}}) as ProductOptions
   }
 
   // async getAllProductsWithOptions(limit:number, page: number):Promise<any> {

@@ -4,6 +4,8 @@ import path from 'path'
 import ApiError from '../error/ApiError';
 import productService from "../services/productService"
 import fileUpload from 'express-fileupload';
+import { IProductInput } from '../models/product';
+import { IOptionsInput } from '../models/product_options';
 
 interface IObject {
   [key: string]: any;
@@ -28,6 +30,21 @@ class ProductController {
       next(ApiError.badRequest(`Ошибка при создании Product: ${error}`))
     }
   };
+  async updateProduct(req: Request, res: Response, next: NextFunction): Promise<any> {
+    try {
+      const { name, price, product_slug, categoryId, id, description, sizetable_path } = req.body
+      const product = await productService.updateProduct({ id, name, price, product_slug, description, sizetable_path,  })
+
+      if (categoryId) {
+        await productService.createCategoryRelationship(product.get('id'), categoryId)
+      }
+
+      return res.json(product)
+    }
+    catch (error) {
+      next(ApiError.badRequest(`Ошибка при обновлении Product: ${error}`))
+    }
+  };
 
   async createOptions(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
@@ -39,6 +56,18 @@ class ProductController {
       return res.json(createdOptions)
     } catch (error) {
       next(ApiError.badRequest(`Ошибка при создании ProductOptions/ProductOptionImages: ${error}`))
+    }
+  }
+  async updateOptions(req: Request, res: Response, next: NextFunction): Promise<any> {
+    try {
+      const { product_color, options_slug, ProductId, price_increase, po_order, id }:IOptionsInput = req.body
+      const { images } = req?.files as any;
+
+      const createdOptions = await productService.updateOptions({ product_color, options_slug, price_increase: price_increase, ProductId, po_order: po_order, id }, images)
+
+      return res.json(createdOptions)
+    } catch (error) {
+      next(ApiError.badRequest(`Ошибка при обновлении ProductOptions/ProductOptionImages: ${error}`))
     }
   }
 
