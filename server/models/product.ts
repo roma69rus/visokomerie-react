@@ -1,4 +1,4 @@
-import {Column, Model, Table, ForeignKey, DataType, CreatedAt, UpdatedAt, DeletedAt, HasMany, BelongsTo, BelongsToMany} from 'sequelize-typescript'
+import {Column, Model, Table, ForeignKey, DataType, CreatedAt, UpdatedAt, DeletedAt, HasMany, BelongsTo, BelongsToMany, BeforeDestroy} from 'sequelize-typescript'
 import {Category} from './product_category'
 import {ProductOptions} from './product_options'
 import {ProductsToCategories} from './products_to_categories'
@@ -41,8 +41,17 @@ export class Product extends Model<Product, IProductInput> {
   @BelongsToMany(() => Category, () => ProductsToCategories)
   public Categories!: Category[];
 
-  @HasMany(() => ProductOptions)
+  @HasMany(() => ProductOptions, {
+    onDelete: "CASCADE",
+    hooks: true
+  })
   public ProductOptions!: ProductOptions[];
+
+  @BeforeDestroy
+  static async removeOptions (instance: Product) {
+    console.log('Instance %s.', instance)
+    await ProductOptions.destroy({ where: { ProductId: instance.id } })    
+  }
   
   @CreatedAt
   public readonly createdAt!: Date;

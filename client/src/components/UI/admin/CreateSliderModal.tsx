@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { InputGroup } from 'react-bootstrap';
 import { useState } from 'react';
 import { createSlide } from '../../../http/sliderAPI';
+import { Context, IContext } from '../../..';
 
 export interface ICreateSliderModalProps {
   onHide: () => void;
@@ -13,6 +14,7 @@ export interface ICreateSliderModalProps {
 
 export function CreateSliderModal(props: ICreateSliderModalProps) {
 
+  const { sliderData } = React.useContext(Context) as IContext
   const [isVideo, setIsVideo] = useState<boolean>(false)
   const [url, setUrl] = useState<string>('')
   const [btnText, setBtnText] = useState<string>('')
@@ -32,17 +34,9 @@ export function CreateSliderModal(props: ICreateSliderModalProps) {
       setIsVideo(false)
       setUrl('')
       setBtnText('')
+      sliderData.setSlider([...sliderData.slider.concat(data)])
       props.onHide()
-    })
-    // createSlide({ isVideo: isVideo, url, btn_text: btnText, image: files as File}).then((data) => {
-    //   console.log(data)
-    //   setIsVideo(false)
-    //   setUrl('')
-    //   setBtnText('')
-    //   props.onHide()
-    // })
-    
-
+    })    
   }
 
   const setFilesHandler = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,11 +48,6 @@ export function CreateSliderModal(props: ICreateSliderModalProps) {
     
   };
 
-  // const handleImageChange = ({ currentTarget: {files}, }: React.ChangeEvent<HTMLInputElement>) => {
-  //     if (files && files.length) {
-  //       setFiles(files);
-  //     }
-  // }
 
   return (
     <DefaultCreateModal

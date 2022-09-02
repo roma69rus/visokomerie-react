@@ -1,28 +1,59 @@
 import * as React from 'react'
+import { getOneOption } from '../../../http/productAPI';
+import { IProductOptions } from '../../../types/productOptionsTypes';
+import { getlocalStorage, ICart } from '../../LocalStorage/localStorage';
+import { CartCard } from './VMCartCard';
 
 export interface IVMCartProps {
 }
 
 export function VMCart(props: IVMCartProps) {
+  const [items, setItems] = React.useState<ICart>(getlocalStorage());                   //localStorage
+  const [products, setProducts] = React.useState<IProductOptions[]>([])  //DataBase
+  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+
+  React.useEffect(() => {
+
+    console.log("Object.keys(items)", Object.keys(items))
+
+    Object.keys(items).map((item) => {
+      setIsLoading(true)
+      getOneOption(Number(item)).then((data) => {
+        console.log("data", data)
+        setProducts([...products, data])
+        console.log("products", products)
+
+      }).finally(() => {
+        setIsLoading(false)
+
+      })
+
+    })
+  }, []);
+
+
+
+
   return (
     <main>
       <section className="cart container">
         <div className="cart__wrapper">
-          <h2 className="cart__heading" style={{marginTop: "40px"}}>Корзина</h2>
+          <h2 className="cart__heading" style={{ marginTop: "40px" }}>Корзина</h2>
           <ul className="cart__list" id="cart__list">
-            <li className='cart__list-item'>
-              <img src='./1_black_palaco.jpg' alt='' width='262' height='306' className='cart__list-img' />
-              <div className='cart__list-wrapper'>
-                <h3 className='cart__list-heading'>NAME</h3>
-                <div className="cart__list-close"></div>
-                <p className='cart__list-text'>Цена: <span className='cart__price'>10000</span></p>
-                <p className='cart__list-text'>Цвет: COLOR</p>
-                <div className='cart__list-subwrapper'>
-                  <label className='cart__list-text'>Количество: </label>
-                  <input type='number' min='1' step='1' className='cart__list-qty' value='10' />
-                </div>
-              </div>
-            </li>
+            {!isLoading ?
+              products.map((item) => {
+                return (
+                  <CartCard key={item.id}
+                    name={item.Product?.name as string}
+                    price={item.price_increase + (item.Product?.price as number)}
+                    color={item.product_color}
+                    quantity={items[item.id].quantity}
+                  />
+                )
+
+              })
+              : <div>Загрузка</div>
+            }
           </ul>
           <ul className="cart__list-buttons" id="cart__clear">
             <li>

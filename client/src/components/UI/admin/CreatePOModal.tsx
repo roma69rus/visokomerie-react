@@ -5,6 +5,9 @@ import Form from 'react-bootstrap/Form';
 import { InputGroup } from 'react-bootstrap';
 import { useState } from 'react';
 import { createProductOption } from '../../../http/productAPI';
+import { Context, IContext } from '../../..';
+import { IProduct } from '../../../types/productTypes';
+import { IProductOptions } from '../../../types/productOptionsTypes';
 
 export interface ICreatePOModalProps {
   onHide: () => void;
@@ -14,6 +17,7 @@ export interface ICreatePOModalProps {
 
 export function CreatePOModal(props: ICreatePOModalProps) {
 
+  const { productData } = React.useContext(Context) as IContext
   const [product_color, setProduct_color] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [price_increase, setPrice_increase] = useState<number>(0)
@@ -29,12 +33,14 @@ export function CreatePOModal(props: ICreatePOModalProps) {
     formData.append('ProductId', props.ProductId.toString())
     for (let i = 0; i < files.length; i++) {
       formData.append('images', files[i])
-      
+
     }
-    
+
 
 
     createProductOption(formData).then((data) => {
+      console.log("DATAAAAAAA", data)
+      productData.setProductWithOptions({...(productData.productWithOptions as IProduct), ProductOptions: (productData.productWithOptions?.ProductOptions as IProductOptions[]).concat(data.ProductOptions)})
       console.log(data)
       setProduct_color('')
       setOptions_slug('')

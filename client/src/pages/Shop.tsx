@@ -18,6 +18,7 @@ export const Shop = observer((props: IShopProps) => {
   React.useEffect(() => {
     getMainPageOptions().then((data) => {
       productData.setAllOptions(data)
+      console.log("PG", data)
     })
 
     getSlider().then((data) => {

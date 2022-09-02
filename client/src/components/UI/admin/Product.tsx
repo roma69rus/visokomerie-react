@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import { Image, Row, Col } from 'react-bootstrap';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { CreateProductModal } from './CreateProductModal';
-import { getAllProducts, updateProduct } from '../../../http/productAPI';
+import { deleteProduct, getAllProducts, updateProduct } from '../../../http/productAPI';
 import { IProduct } from '../../../types/productTypes';
 
 
@@ -19,7 +19,7 @@ export function AdmProduct(props: IAdmProductProps) {
 
   const [modalShow, setModalShow] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true)
-  let [editedProduct, setEditedProduct] = React.useState<IProduct>()
+  const [editedProduct, setEditedProduct] = React.useState<IProduct>()
 
 
   React.useEffect(() => {
@@ -49,7 +49,7 @@ export function AdmProduct(props: IAdmProductProps) {
                   <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
                     <InputGroup.Text id="inputGroup-sizing-sm">NAME</InputGroup.Text>
                     <Form.Control
-                      disabled={prod.id === editedProduct?.id ? false: true}
+                      disabled={prod.id === editedProduct?.id ? false : true}
                       aria-label="Small"
                       aria-describedby="inputGroup-sizing-sm"
                       defaultValue={prod.name}
@@ -61,7 +61,7 @@ export function AdmProduct(props: IAdmProductProps) {
                   <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
                     <InputGroup.Text id="inputGroup-sizing-sm">DESCRIPTION</InputGroup.Text>
                     <Form.Control
-                      disabled={prod.id === editedProduct?.id ? false: true}
+                      disabled={prod.id === editedProduct?.id ? false : true}
                       aria-label="Small"
                       aria-describedby="inputGroup-sizing-sm"
                       defaultValue={prod.description as string}
@@ -73,7 +73,7 @@ export function AdmProduct(props: IAdmProductProps) {
                   <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
                     <InputGroup.Text id="inputGroup-sizing-sm">PRICE</InputGroup.Text>
                     <Form.Control
-                      disabled={prod.id === editedProduct?.id ? false: true}
+                      disabled={prod.id === editedProduct?.id ? false : true}
                       aria-label="Small"
                       aria-describedby="inputGroup-sizing-sm"
                       defaultValue={prod.price}
@@ -85,7 +85,7 @@ export function AdmProduct(props: IAdmProductProps) {
                   <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
                     <InputGroup.Text id="inputGroup-sizing-sm">PRODUCT SLUG</InputGroup.Text>
                     <Form.Control
-                      disabled={prod.id === editedProduct?.id ? false: true}
+                      disabled={prod.id === editedProduct?.id ? false : true}
                       aria-label="Small"
                       aria-describedby="inputGroup-sizing-sm"
                       defaultValue={prod.product_slug}
@@ -97,7 +97,7 @@ export function AdmProduct(props: IAdmProductProps) {
                   <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
                     <InputGroup.Text id="inputGroup-sizing-sm">SIZETABLE</InputGroup.Text>
                     <Form.Control
-                      disabled={prod.id === editedProduct?.id ? false: true}
+                      disabled={prod.id === editedProduct?.id ? false : true}
                       aria-label="Small"
                       aria-describedby="inputGroup-sizing-sm"
                       defaultValue={prod.sizetable_path as string}
@@ -107,20 +107,21 @@ export function AdmProduct(props: IAdmProductProps) {
                     />
                   </InputGroup>
                   <Button
-                    disabled={prod.id === editedProduct?.id ? false: true}
+                    disabled={prod.id === editedProduct?.id ? false : true}
                     variant="success"
                     type="button"
                     className='mb-2'
                     onClick={() => {
-                      setEditedProduct({...editedProduct, id: 0} as IProduct)
+                      setEditedProduct({ ...editedProduct, id: 0 } as IProduct)
                       updateProduct(editedProduct!)
-                      
+
                     }}
-                    
+
                   >
                     Сохранить
                   </Button>
                   <Button
+                    disabled={prod.id === editedProduct?.id ? true : false}
                     variant="primary"
                     type="button"
                     className='mb-2 ms-2'
@@ -130,6 +131,22 @@ export function AdmProduct(props: IAdmProductProps) {
                   >
                     Редактировать
                   </Button>
+                  <Button variant="outline-danger" className='mb-2 ms-2'
+                  disabled={prod.id === editedProduct?.id ? false : true}
+                  onClick={() => {
+                    setIsLoading(true)
+                    deleteProduct(prod.id as number).then((data)=> {
+                      const index = productData.allProducts.indexOf(prod);
+                      if (index > -1) {
+                        productData.allProducts.splice(index, 1) 
+                      }
+                      console.log("index", index)
+                      setIsLoading(false)
+                    })                    
+                  }}
+                >
+                  Удалить
+                </Button>
                 </Form>
               </Col>
               <hr />

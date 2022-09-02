@@ -6,6 +6,7 @@ import fileUpload from 'express-fileupload';
 import routes from './routes/indexRouter';
 import ErrorHandler from './middleware/ErrorHandlingMiddleware'
 import path from 'path'
+import { Category } from './models/product_category';
 
 
 dotenv.config();

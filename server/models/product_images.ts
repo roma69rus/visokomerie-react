@@ -3,6 +3,7 @@ import {ProductOptions} from './product_options'
 
 
 export interface IImagesInput {
+  id?: number;
   img_path: string;
   main_image: boolean;
   ProductOptionId: number;

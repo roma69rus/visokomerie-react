@@ -7,8 +7,9 @@ import { Image, Row, Col } from 'react-bootstrap';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { CreatePTCModal } from './CreatePTCModal';
-import { getAllProducts, getOptionsByProductName } from '../../../http/productAPI';
+import { deleteRel, getAllProducts, getOptionsByProductName } from '../../../http/productAPI';
 import { ICategory } from '../../../types/categoryTypes';
+import { IProduct } from '../../../types/productTypes';
 
 
 export interface IAdmProductToCategory {
@@ -19,14 +20,8 @@ export function AdmProductToCategory(props: IAdmProductToCategory) {
   const { productData } = React.useContext(Context) as IContext
 
   const [productNameID, setProductNameID] = React.useState(0);
-  const [prodCategories, setProdCategories] = React.useState<ICategory[]>([]) 
   const [modalShow, setModalShow] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
-
-  const addProductCategory = (cat: ICategory) => {
-    setProdCategories([...prodCategories, cat])
-  }
-
 
 
   React.useEffect(() => {
@@ -49,7 +44,7 @@ export function AdmProductToCategory(props: IAdmProductToCategory) {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-        {(productData.allProducts || []).map((i) => {
+          {(productData.allProducts || []).map((i) => {
             return (
               <Dropdown.Item
                 key={i.id}
@@ -58,11 +53,7 @@ export function AdmProductToCategory(props: IAdmProductToCategory) {
                     setIsLoading(true)
                     setProductNameID(i.id as number)
                     productData.setProductWithOptions(data)
-
-                    setProdCategories(productData.productWithOptions?.Categories as ICategory[])
-
-                    
-                  }).finally(()=> {
+                  }).finally(() => {
                     setIsLoading(false)
                   })
                 }}
@@ -76,27 +67,41 @@ export function AdmProductToCategory(props: IAdmProductToCategory) {
 
       {!isLoading && productNameID
         ? <>
-          <h2>{productData.productWithOptions?.name}</h2> 
+          <h2>{productData.productWithOptions?.name}</h2>
 
-          {prodCategories.map((cat: ICategory) => {  
+          {(productData?.productWithOptions?.Categories as ICategory[]).map((cat: ICategory) => {
             return (
               <Row className='mt-4' key={cat.id}>
-                <Col md={6}>
-                  <Form>
-                    <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
-                      <Form.Control
-                        aria-label="Small"
-                        aria-describedby="inputGroup-sizing-sm"
-                        value={(cat as ICategory).name}
-                      />
-                      <Button variant="danger" size="lg"
-                      //  onClick={}
-                      >
-                        удалить
-                      </Button>
-                    </InputGroup>
-                  </Form>
-                </Col>
+                {!isLoading &&
+                  <Col md={6}>
+                    <Form>
+                      <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
+                        <Form.Control
+                          disabled
+                          aria-label="Small"
+                          aria-describedby="inputGroup-sizing-sm"
+                          defaultValue={(cat as ICategory).name}
+                        />
+                        <Button variant="danger" size="lg"
+                          onClick={() => {
+                            setIsLoading(true)
+                            deleteRel(productData.productWithOptions?.id as number, cat.id as number).then((data) => {
+                              const index = (productData?.productWithOptions?.Categories as ICategory[]).indexOf(cat) as number;
+                              if (index > -1) {
+
+                                (productData?.productWithOptions?.Categories as ICategory[]).splice(index, 1)
+                              }
+                              console.log("index", index)
+                              setIsLoading(false)
+                            })
+                          }}
+                        >
+                          удалить
+                        </Button>
+                      </InputGroup>
+                    </Form>
+                  </Col>
+                }
               </Row>
             )
           })}
@@ -108,9 +113,6 @@ export function AdmProductToCategory(props: IAdmProductToCategory) {
             </Button>
           </div>
           <CreatePTCModal
-            prodCategories={prodCategories}
-            cats={productData.categories}
-            addCat={addProductCategory}
             show={modalShow}
             onHide={() => setModalShow(false)}
           />

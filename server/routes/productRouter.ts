@@ -6,13 +6,24 @@ const router = Router();
 
 router.post('/', checkRole('ADMIN'), productController.createProduct)
 router.put('/', checkRole('ADMIN'), productController.updateProduct)
+router.delete('/', checkRole('ADMIN'), productController.deleteProduct)
+router.get('/', productController.getAllProducts)
+
 router.post('/options', checkRole('ADMIN'), productController.createOptions)
 router.put('/options', checkRole('ADMIN'), productController.updateOptions)
+router.delete('/options', checkRole('ADMIN'), productController.deleteOptions)
 router.get('/options/:ProductId', productController.getAllOptions)
+router.get('/options/one/:OptionId', productController.getOneOption)
 router.get('/options', productController.getAllOptions)
+
+router.put('/options/image', checkRole('ADMIN'), productController.updateImage)
+router.delete('/options/image', checkRole('ADMIN'), productController.deleteImage)
+
 router.get('/all', productController.getAllProductsWithOptions)
-router.get('/', productController.getAllProducts)
 router.get('/:product_slug', productController.getOptionsByProductName)
+
+router.post('/rel', checkRole('ADMIN'), productController.createCategoryRelationship)
+router.delete('/rel', checkRole('ADMIN'), productController.deleteCategoryRelationship)
 
 
 export default router;

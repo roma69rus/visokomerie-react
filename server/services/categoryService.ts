@@ -103,6 +103,14 @@ class CategoryService {
     });
     return JSON.parse(JSON.stringify(categories))
   }
+  async updateCategory(cat: ICategoryInput): Promise<any> {
+    await Category.update(cat, {where: {id: cat.id}})
+    return await Category.findOne({ where: { id: cat.id } });
+  }
+
+  async deleteCategory(id: number): Promise<any> {    
+    return await Category.destroy({where:{id}})
+  }
 
   async getOneCategoryWithOptions(category_slug: string): Promise<any> {
 

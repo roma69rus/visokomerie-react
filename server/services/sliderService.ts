@@ -16,6 +16,25 @@ class SliderService {
     return JSON.parse(JSON.stringify(slider)) 
   };
 
+  async update(dto:ISliderInput, img:any) {
+    if (img) {
+      const img_path:string = uuidv4() + ".jpg";
+      img.mv(path.resolve(__dirname, '..', 'static', img_path));
+  
+      await Slider.update({...dto, img_path: img_path}, {where: {id: dto.id}})
+      return await Slider.findOne({where: {id: dto.id}}) 
+    }
+    else {
+      const sl = await Slider.findOne({where: {id: dto.id}})
+      await Slider.update({...sl, ...dto, img_path: sl?.img_path}, {where: {id: dto.id}})
+      return await Slider.findOne({where: {id: dto.id}})
+    } 
+  };
+
+  async delete(id: number) {
+    await Slider.destroy({where: {id}}) 
+  };
+
   async getAll():Promise<any> {
    
       const slider = await Slider.findAll();

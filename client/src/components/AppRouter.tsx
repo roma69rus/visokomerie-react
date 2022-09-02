@@ -18,7 +18,7 @@ export function AppRouter(props: IAppRouterProps) {
         <Route key={path} path={path} element={<Component />} />
       )}
       {userData.isAuth && publicRoutes.filter(item => item.path===LOGIN_ROUTE).map(({ path, Component }) =>
-        <Route key={path} path={path} element={<Navigate to={ADMIN_ROUTE} replace />} />
+        <Route key={path} path={path} element={<Navigate to={ADMIN_ROUTE} />} />
       )}
       {publicRoutes.filter(item => item.path===LOGIN_ROUTE).map(({ path, Component }) =>
         <Route key={path} path={path} element={<Component />} />

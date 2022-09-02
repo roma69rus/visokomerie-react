@@ -2,10 +2,12 @@ import {Column, Model, Table, ForeignKey, DataType, CreatedAt, UpdatedAt, Delete
 
 
 export interface ISliderInput {
+  id?: number;
   img_path: string;
   url: string;
   btn_text: string;
   isVideo: boolean;
+  slide_order?: number;
 }
 
 @Table({tableName:"slider", timestamps:true, paranoid: true})

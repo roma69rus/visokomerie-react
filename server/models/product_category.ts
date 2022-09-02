@@ -4,8 +4,11 @@ import {ProductsToCategories} from './products_to_categories'
 
 
 export interface ICategoryInput {
+  id?: number;
+  description?: string;
   name: string;
   category_slug: string;
+  category_order?: number;
 }
 
 @Table({tableName:"product_category", timestamps:true, paranoid: true})

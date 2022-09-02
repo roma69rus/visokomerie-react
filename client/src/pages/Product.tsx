@@ -8,6 +8,8 @@ import { VMSwiper } from '../components/UI/swiper/VMSwiper';
 import { createProduct, getOneProduct } from '../http/productAPI';
 import { observer } from 'mobx-react-lite';
 import { IProductOptionsImages } from '../types/productOptionsTypes';
+import { DefaultShopModal } from '../components/UI/modals/defaultShopModal';
+import { ToCardModal } from '../components/UI/product/ToCardModal';
 
 export interface IProductProps {
 }
@@ -19,30 +21,32 @@ export const Product = observer((props: IProductProps) => {
   const { product_slug } = useParams()
 
   const [searchParams, setSearchParams] = useSearchParams();
+  
   const color = searchParams.get("color")
- 
+
   React.useEffect(() => {
     getOneProduct(product_slug as string, color).then((data) => {
-      productData.setProductWithOneOption(data) 
+      productData.setProductWithOneOption(data)
 
-      console.log("productData.productWithOneOption", productData.productWithOneOption) 
-    }) 
+      console.log("productData.productWithOneOption", productData.productWithOneOption)
+    })
 
-  }, []);    
+  }, []);
 
 
   return (
-    <div> 
+    <div>
       <Header />
       <section className='product'>
         <div className='container product__container'>
           <VMSwiper
-            images={productData.productWithOneOption?.ProductOptions[0]?.ProductOptionsImages as IProductOptionsImages[]} 
+            images={productData.productWithOneOption?.ProductOptions[0]?.ProductOptionsImages as IProductOptionsImages[]}
           />
         </div>
       </section>
-      <ProductInfoSection/> 
+      <ProductInfoSection />
       <VMFooter />
+      
     </div>
   );
 }) 
