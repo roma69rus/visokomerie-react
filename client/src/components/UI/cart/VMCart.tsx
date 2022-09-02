@@ -24,7 +24,7 @@ export function VMCart(props: IVMCartProps) {
         console.log("products", products)
 
       }).finally(() => {
-        setIsLoading(false)
+        setIsLoading(false) 
 
       })
 
