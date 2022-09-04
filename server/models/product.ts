@@ -49,7 +49,6 @@ export class Product extends Model<Product, IProductInput> {
 
   @BeforeDestroy
   static async removeOptions (instance: Product) {
-    console.log('Instance %s.', instance)
     await ProductOptions.destroy({ where: { ProductId: instance.id } })    
   }
   

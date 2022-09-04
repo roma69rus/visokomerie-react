@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Context, IContext } from '..';
 import { AdmCategories } from '../components/UI/admin/Categories';
+import { OrderList } from '../components/UI/admin/OrderList';
 import { AdmProduct } from '../components/UI/admin/Product';
 import { AdmProductOptions } from '../components/UI/admin/ProductOptions';
 import { AdmProductToCategory } from '../components/UI/admin/ProductToCategory';
@@ -55,6 +56,9 @@ export const Admin = observer((props: IAdminProps) => {
             }
             {selectedItem==="PTC" &&
               <AdmProductToCategory/>
+            }
+            {selectedItem==="Order" &&
+              <OrderList/>
             }
             
           </Col>

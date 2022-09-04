@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { createOrder } from '../../../http/order';
 import { getCartOptions, } from '../../../http/productAPI';
 import { IProductOptions } from '../../../types/productOptionsTypes';
 import { clearlocalStorage, getlocalStorage, ICart } from '../../LocalStorage/localStorage';
@@ -11,6 +12,8 @@ export function VMCart(props: IVMCartProps) {
   const [items, setItems] = React.useState<ICart>(getlocalStorage());                   //localStorage
   const [products, setProducts] = React.useState<IProductOptions[]>([])  //DataBase
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const [phone, setPhone] = React.useState<string>("")
+  const [name, setName] = React.useState<string>("")
 
   React.useEffect(() => {
 
@@ -22,9 +25,16 @@ export function VMCart(props: IVMCartProps) {
       setIsLoading(false)
     })
 
-    console.log(items)
 
   }, []);
+
+  const createOrders = async () => {
+    let ids:number[] = []
+    products.map((i) => {
+      ids.push(i.id)
+    })
+    await createOrder({name, phone, ids})
+  }
 
 
 
@@ -76,10 +86,10 @@ export function VMCart(props: IVMCartProps) {
               <form className="cart__shipping" id="cart__shipping" action="post">
                 <h3 className="cart__shipping_heading">Имя</h3>
                 <label className="visually-hidden" htmlFor="name">Name</label>
-                <input className="cart__phone" id="clientname" type="text" placeholder="Ваше имя" />
+                <input className="cart__phone" id="clientname" type="text" placeholder="Ваше имя" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}/>
                 <h3 className="cart__shipping_heading">Номер телефона</h3>
                 <label className="visually-hidden" htmlFor="phone">Phone</label>
-                <input className="cart__phone phone" id="phone" type="text" placeholder="+7 (912) 345-67-89" />
+                <input className="cart__phone phone" id="phone" type="text" placeholder="+7 (912) 345-67-89" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPhone(event.target.value)}/>
               </form>
               <div className="cart__total">
                 <div className="cart__total_text_wrapper">
@@ -87,7 +97,11 @@ export function VMCart(props: IVMCartProps) {
                 </div>
                 <div className="cart__total_checkout_wrapper">
                   <hr className="cart__total_line" />
-                  <button className="cart__total_checkout" id="cart__total_checkout" type="submit" data-modal="3">Заказать</button>
+                  <button className="cart__total_checkout" id="cart__total_checkout" type="submit" data-modal="3"
+                    onClick={() => {
+                      createOrders()
+                    }}
+                  >Заказать</button>
                 </div>
                 <p className="condition">Нажимая кнопку "Заказать", вы даете согласие на обработку персональных данных в любой форме</p>
               </div>

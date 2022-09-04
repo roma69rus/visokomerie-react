@@ -1,6 +1,8 @@
 import {ProductOptionsImages} from './product_images'
 import {Product} from './product'
-import {Column, Model, Table, ForeignKey, DataType, CreatedAt, UpdatedAt, DeletedAt, HasMany, HasOne, BelongsTo} from 'sequelize-typescript'
+import {Column, Model, Table, ForeignKey, DataType, CreatedAt, UpdatedAt, DeletedAt, HasMany, HasOne, BelongsTo, BelongsToMany} from 'sequelize-typescript'
+import { Order } from './orders';
+import { ProductOptionsToOrders } from './productOptions_to_orders';
 
 
 export interface IOptionsInput {
@@ -42,6 +44,9 @@ export class ProductOptions extends Model<ProductOptions, IOptionsInput> {
 
   @HasMany(() => ProductOptionsImages)
   public ProductOptionsImages!: ProductOptionsImages[];
+
+  @BelongsToMany(() => Order, () => ProductOptionsToOrders)
+  public Orders!: Order[];
 
   @ForeignKey(() => Product)
   @Column({type: DataType.INTEGER})

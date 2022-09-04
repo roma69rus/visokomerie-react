@@ -56,7 +56,7 @@ export const AdmTypeBar = observer((props: IAdmTypeBarProps) => {
       <Button
         variant="danger"
         style={{ marginTop: "30px", marginBottom: "30px" }}
-        onClick={()=> {
+        onClick={() => {
           userData.setIsAuth(false)
           userData.setUser({})
           localStorage.removeItem('token')
@@ -65,6 +65,16 @@ export const AdmTypeBar = observer((props: IAdmTypeBarProps) => {
         }}
       >Выйти
       </Button>
+      <ListGroup className='mt-5'>
+        <ListGroup.Item
+          active={props.selectedItem === "Order"}
+          onClick={(event: any) => {
+            props.setSelectedItem("Order")
+          }}
+        >Заказы
+        </ListGroup.Item>
+      </ListGroup>
     </div>
+
   );
 })
