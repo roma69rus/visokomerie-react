@@ -16,6 +16,7 @@ export function VMCart(props: IVMCartProps) {
 
     console.log("Object.keys(items)", Object.keys(items))
 
+
     Object.keys(items).map((item) => {
       setIsLoading(true)
       getOneOption(Number(item)).then((data) => {
@@ -24,7 +25,7 @@ export function VMCart(props: IVMCartProps) {
         console.log("products", products)
 
       }).finally(() => {
-        setIsLoading(false) 
+        setIsLoading(false)
 
       })
 
