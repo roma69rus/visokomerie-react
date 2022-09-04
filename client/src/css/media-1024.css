@@ -1,12 +1,12 @@
 @media (max-width: 1470px) {
-   
-    .app__logo{
+
+    .app__logo {
         padding-bottom: 30px;
         padding-left: 0.5em;
         letter-spacing: 0.5em;
         font-size: 70px;
     }
-    
+
     .app__sub {
         padding-left: 0.5em;
         letter-spacing: 0.5em;
@@ -18,22 +18,26 @@
         letter-spacing: 0.3em;
     }
 
-    
+    .footer {
+        padding-top: 50px;
+    }
+
     .footer__text {
         display: none;
     }
 
-    .header{
+    .header {
         height: 49px;
     }
 
-    .header__container{
-        background: rgba(0, 0, 0, 0.5);  
-        padding: 0 30px 0 30px;    
+    .header__container {
+        background: rgba(0, 0, 0, 1);
+        padding: 0 30px 0 30px;
     }
-    .header__container-opacity{
-        display: none;          
-    }  
+
+    .header__container-opacity {
+        display: none;
+    }
 
     .nav__item:not(:last-child) {
         margin-right: 30px;
@@ -41,24 +45,24 @@
 
     .swiper-slide {
         width: 33.3%;
-      }
+    }
 
 
-    .footer__container{
+    .footer__container {
         padding: 0 50px;
     }
 
-    .footer__link{
+    .footer__link {
         font-size: 18px;
     }
 
-    .footer__icon{
+    .footer__icon {
         width: 48px;
         height: 48px;
         margin-right: 25px;
     }
 
-    .footer__icon-svg{
+    .footer__icon-svg {
         width: 48px;
         height: 48px;
     }
@@ -71,10 +75,11 @@
         margin-bottom: 25px;
     }
 
-    .header__brand_text.black{
-        color: white;  
+    .header__brand_text.black {
+        color: white;
 
     }
+
     .catalog__heading {
         align-self: flex-start;
         margin-top: 90px;
@@ -85,10 +90,10 @@
         color: var(--dark-black-color);
         margin-bottom: 10px;
         padding-left: 9px;
-      
-      }
-      
-      .catalog__text {
+
+    }
+
+    .catalog__text {
         align-self: flex-start;
         font-size: 14px;
         line-height: 17px;
@@ -98,39 +103,47 @@
         padding-left: 9px;
         margin-top: 0;
         margin-bottom: 6px;
-      
-      }
-      
-      .catalog__heading.shirt{
+
+    }
+
+    .catalog__heading.shirt {
         margin-top: 10px;
-      }
-      .about__heading {
+    }
+
+    .about__heading {
         font-size: 18px;
-      }
-      
-      .about__text {
+    }
+
+    .about__text {
         font-size: 16px;
-      }
-      .delivery__header {
-        font-size:18px;
-      }
-      
-      .delivery__text {        
-        font-size:14px;        
-      }
-      .delivery__li-text{
+    }
+
+    .delivery__header {
+        font-size: 18px;
+    }
+
+    .delivery__text {
+        font-size: 14px;
+    }
+
+    .delivery__li-text {
         font-size: 12px;
-      }
+    }
 }
 
 @media (max-width: 1120px) {
-    .app__logo{
+    
+    .footer {
+        padding-top: 25px;
+    }
+
+    .app__logo {
         padding-bottom: 30px;
         padding-left: 0.5em;
         letter-spacing: 0.5em;
         font-size: 50px;
     }
-    
+
     .app__sub {
         padding-left: 0.5em;
         letter-spacing: 0.5em;
@@ -141,24 +154,24 @@
         font-size: 35px;
         letter-spacing: 0.3em;
     }
-    
+
     .container {
         padding: 0 50px;
     }
-    
 
-    .header{
+
+    .header {
         height: 49px;
     }
 
-    .header__container-opacity{
+    .header__container-opacity {
         z-index: 50;
         position: absolute;
         top: -99px;
         left: 0;
         width: 100%;
         height: 99px;
-        background-color: rgba(1,1,1, 0.5);        
+        background-color: rgba(1, 1, 1, 0.5);
     }
 
     .burger {
@@ -168,7 +181,7 @@
         height: 23px;
         color: #ffffff;
     }
-    
+
     .burger__line {
         position: absolute;
         display: inline-block;
@@ -177,22 +190,22 @@
         background-color: #ffffff;
         color: #ffffff;
     }
-    
+
     .burger__line:first-child {
         top: 0;
         left: 0;
     }
-    
+
     .burger__line:nth-child(2) {
         top: 45%;
         left: 0;
     }
-    
+
     .burger__line:last-child {
         bottom: 0;
         left: 0;
     }
-    
+
     .logo__img {
         width: 150px;
     }
@@ -224,8 +237,9 @@
     .nav__item:not(:last-child) {
         margin-bottom: 60px;
     }
-    .nav__item.cart_item{
-        display:block;
+
+    .nav__item.cart_item {
+        display: block;
     }
 
     .menu-close {
@@ -261,7 +275,7 @@
     }
 
     .hero {
-        height: 400px;
+        height: 500px;
         position: relative;
         display: flex;
         top: 0;
@@ -270,12 +284,13 @@
     }
 
     .hero-content__btn {
-        margin-top: 40%;
-        font-size: 25px;
-        width: 250px;
-        padding: 15px 22px 14px 32px;
+        /* margin-top: 40%; */
+        font-size: 15px;
+        padding: 8px 30px 6px 30px;
         text-align: center;
+        /* margin-top: 50%; */
         z-index: 100;
+        font-size: 14px;
     }
 
     .hero-big-image {
@@ -307,7 +322,7 @@
         margin-bottom: 60px;
     } */
 
-    
+
 
     .footer-wrapper {
         min-width: 100%;
@@ -335,24 +350,26 @@
     .footer__list {
         margin-bottom: 60px;
     }
-    .footer__icon{
+
+    .footer__icon {
         width: 48px;
         height: 48px;
         margin-right: 25px;
     }
 
-    .footer__icon-svg{
+    .footer__icon-svg {
         width: 48px;
         height: 48px;
     }
-    .container
-    {
+
+    .container {
         padding: 0 40px;
     }
 
-    .header__brand_text_cat.black{
+    .header__brand_text_cat.black {
         color: white;
     }
+
     .catalog__heading {
         align-self: flex-start;
         margin-top: 90px;
@@ -363,10 +380,10 @@
         color: var(--dark-black-color);
         margin-bottom: 10px;
         padding-left: 9px;
-      
-      }
-      
-      .catalog__text {
+
+    }
+
+    .catalog__text {
         align-self: flex-start;
         font-size: 14px;
         line-height: 17px;
@@ -376,37 +393,41 @@
         padding-left: 9px;
         margin-top: 0;
         margin-bottom: 6px;
-      
-      }
-      
-      .catalog__heading.shirt{
+
+    }
+
+    .catalog__heading.shirt {
         margin-top: 10px;
-      }
-      .cart {        
+    }
+
+    .cart {
         position: relative;
         top: 0px;
-      }
+    }
 
-      .cart__text-whatsapp{
+    .cart__text-whatsapp {
         font-size: 16px;
         line-height: 18px;
-      }
-      .about__heading {
+    }
+
+    .about__heading {
         font-size: 16px;
-      }
-      
-      .about__text {
+    }
+
+    .about__text {
         font-size: 14px;
-      }
-      .delivery__header {
-        font-size:18px;
-      }
-      
-      .delivery__text {        
-        font-size:14px;        
-      }
-      .delivery__li-text{
+    }
+
+    .delivery__header {
+        font-size: 18px;
+    }
+
+    .delivery__text {
+        font-size: 14px;
+    }
+
+    .delivery__li-text {
         font-size: 12px;
-      }
-    
+    }
+
 }

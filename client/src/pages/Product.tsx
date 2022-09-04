@@ -36,11 +36,12 @@ export const Product = observer((props: IProductProps) => {
 
   return (
     <div>
-      <Header />
+      <Header color='WHITE'/>
       <section className='product'>
         <div className='container product__container'>
           <VMSwiper
             images={productData.productWithOneOption?.ProductOptions[0]?.ProductOptionsImages as IProductOptionsImages[]}
+            isButtonOn={false}
           />
         </div>
       </section>

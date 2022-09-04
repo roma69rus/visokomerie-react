@@ -73,8 +73,8 @@ export const getOneProduct = async (product_slug: string | null, color: string |
     const { data } = await $host.get<IProduct>('api/products/' + product_slug + '?color=' + color)
     return data
 }
-export const getOneOption = async (OptionId: number) => {
-    const { data } = await $host.get<IProductOptions>('api/products/options/one/' + OptionId.toString())
+export const getCartOptions = async (ids: number[]) => {
+    const { data } = await $host.post<IProductOptions[]>('api/products/options/cart/', {ids: ids})
     return data
 }
 
@@ -106,7 +106,7 @@ export const deleteCategory = async (id: number) => {
 }
 
 export const getMainPageOptions = async () => {
-    const { data } = await $host.get<IProductOptions[]>('api/products/options')
+    const { data } = await $host.get<IProductOptions[]>('api/products/options?' + "main_page=true")
     return data
 }
 

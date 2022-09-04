@@ -9,7 +9,7 @@
     }
 
     .header__container {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 1);
     }
 
     .header__container-opacity {
@@ -33,7 +33,7 @@
     }
 
     .hero-content__btn {
-        margin-top: 40%;
+        /* margin-top: 40%; */
         font-size: 13px;
         width: 175px;
         padding: 10px 27px 8px 27px;

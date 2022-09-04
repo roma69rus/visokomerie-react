@@ -13,6 +13,7 @@ export function Hero({slider}: IHeroProps) {
             <div className="container hero__container">
                 <VMSwiper
                     images = {slider}
+                    isButtonOn={true}
                 />                
             </div>
         </section>

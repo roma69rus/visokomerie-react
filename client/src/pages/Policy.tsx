@@ -7,7 +7,7 @@ export interface IPolicyProps {
 export function Policy (props: IPolicyProps) {
   return (
     <div>
-      <Header/>
+      <Header color='BLACK'/>
       Policy
     </div>
   );

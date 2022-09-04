@@ -26,18 +26,33 @@ export function ProductInfoSection(props: IProductInfoSectionProps) {
         <p className="product__text">{productData.productWithOneOption?.ProductOptions[0].product_color}</p>
         <p className="product__price">{productData.productWithOneOption?.price}</p>
         <div className="product__divider"></div>
-        <Dropdown text='Описание, состав' pointing style={{ color: "black", marginBottom: "30px" }}>
-          <Dropdown.Menu>
-            <Dropdown.Header style={{ height: "auto", textWeight: "normal" }}>{productData.productWithOneOption?.ProductOptions[0].description}</Dropdown.Header>
+        {/* <Dropdown text='Описание, состав' pointing style={{ color: "black", marginBottom: "30px",  }}>
+          <Dropdown.Menu style={{ marginLeft: "auto" }}>
+            <Dropdown.Header style={{ height: "auto", textWeight: "normal"}}>
+              <div
+                dangerouslySetInnerHTML={{ __html: productData.productWithOneOption?.ProductOptions[0].description as string }}>
+              </div>
+            </Dropdown.Header>
           </Dropdown.Menu>
-        </Dropdown>
-        <p className="product__order-info">Для того, чтобы наши изделия сидели на вас безупречно и были идеального размера, мы поможем вам определить размер после оформления заказа в WhatsApp.</p>
+        </Dropdown> */}
+        <div style={{ border: "1px solid #E2E2E2", marginBottom:"25px", minWidth: "600px"}}> 
+          <div style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: "8px" }}>Описание и состав</div>
+          <div style={{paddingLeft: "12px", paddingRight: "12px", paddingBottom: "12px", textAlign: "justify"}}
+            dangerouslySetInnerHTML={{ __html: productData.productWithOneOption?.ProductOptions[0].description as string }}            
+          />
+        </div>
+
+
+        <p className="product__order-info"
+          style={{marginTop: "20px"}}
+        >Для того, чтобы наши изделия сидели на вас безупречно и были идеального размера, мы поможем вам определить размер после оформления заказа в WhatsApp.</p>
         <div
           className="product__addtocart js-open-modal"
+          style={{marginTop: "20px"}}
           data-modal="2"
           data-img="/images/1_black_leather/1_black_leather.JPG"
           onClick={() => {
-            setModalShow(true)            
+            setModalShow(true)
             addTolocalStorage(productData.productWithOneOption?.ProductOptions[0].id as number)
           }}
         >

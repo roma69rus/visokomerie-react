@@ -11,7 +11,7 @@ export interface IProductGridProps {
 export function ProductGrid({ productsOptions }: IProductGridProps) {
 
   return (
-    <Container>
+    <Container style={{maxWidth: "1400px"}}>
       <Row className='d-flex justify-content-center mb-5'>
 
         {/* {mainPageProduct.map(({id, name, description, price, product_slug, sizetable_path, ProductOptions}: IProduct) => { */}

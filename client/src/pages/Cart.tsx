@@ -9,7 +9,7 @@ export interface ICartProps {
 export function Cart(props: ICartProps) {
   return (
     <>
-      <Header />
+      <Header color='BLACK'/>
       <VMCart />
       <VMFooter/>
     </>

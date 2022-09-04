@@ -31,7 +31,7 @@ export const Admin = observer((props: IAdminProps) => {
 
   return (
     <div>
-      <Header/>
+      <Header color='WHITE'/>
       <Container>
         <Row className='mt-4'>
           <Col md = {3}>

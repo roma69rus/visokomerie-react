@@ -45,6 +45,7 @@ export function AdmProductOptions(props: IAdmProductOptions) {
     formData.append('ProductId', editedProductOpt!.ProductId.toString())
     formData.append('description', editedProductOpt!.description as string)
     formData.append('po_order', editedProductOpt!.po_order as unknown as string)
+    formData.append('main_page', editedProductOpt!.main_page.toString())
     formData.append('price_increase', editedProductOpt!.price_increase as unknown as string)
     for (let i = 0; i < files.length; i++) {
       formData.append('images', files[i])
@@ -109,6 +110,18 @@ export function AdmProductOptions(props: IAdmProductOptions) {
                 <Col md={6}>
                   <h2>{po.product_color}</h2>
                   <Form>
+                    <Form.Check
+                      disabled={po.id === editedProductOpt?.id ? false : true}
+                      className='PO'
+                      style={{ margin: "8px 0 8px 0" }}
+                      type="switch"
+                      id="custom-switch"
+                      label="Показывать на главной"
+                      defaultChecked={po.main_page || false}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        po.main_page = event.target.checked
+                      }}
+                    />
                     <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
                       <InputGroup.Text id="inputGroup-sizing-sm">COLOR</InputGroup.Text>
                       <Form.Control
@@ -124,7 +137,7 @@ export function AdmProductOptions(props: IAdmProductOptions) {
 
                     <InputGroup size="sm" className="mb-3" style={{ marginTop: "10px" }}>
                       <InputGroup.Text id="inputGroup-sizing-sm">Description</InputGroup.Text>
-                      <Form.Control
+                      <Form.Control as="textarea" rows={5}
                         disabled={po.id === editedProductOpt?.id ? false : true}
                         aria-label="Small"
                         aria-describedby="inputGroup-sizing-sm"

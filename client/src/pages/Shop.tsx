@@ -31,7 +31,7 @@ export const Shop = observer((props: IShopProps) => {
 
   return (
     <div>
-      <Header />
+      <Header color='WHITE'/>
       <Hero
         slider={sliderData.slider}
       />

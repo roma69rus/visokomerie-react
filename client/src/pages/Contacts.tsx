@@ -7,7 +7,7 @@ export interface IContactsProps {
 export function Contacts (props: IContactsProps) {
   return (
     <div>
-      <Header/>
+      <Header color='BLACK'/>
       Contacts
       
     </div>

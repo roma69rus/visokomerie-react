@@ -10,10 +10,10 @@ router.delete('/', checkRole('ADMIN'), productController.deleteProduct)
 router.get('/', productController.getAllProducts)
 
 router.post('/options', checkRole('ADMIN'), productController.createOptions)
+router.post('/options/cart', productController.getCartOptions)
 router.put('/options', checkRole('ADMIN'), productController.updateOptions)
 router.delete('/options', checkRole('ADMIN'), productController.deleteOptions)
 router.get('/options/:ProductId', productController.getAllOptions)
-router.get('/options/one/:OptionId', productController.getOneOption)
 router.get('/options', productController.getAllOptions)
 
 router.put('/options/image', checkRole('ADMIN'), productController.updateImage)

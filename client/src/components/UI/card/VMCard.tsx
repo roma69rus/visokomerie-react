@@ -40,12 +40,13 @@ export function VMCard(prop: IVMCardProps) {
       onClick={() => {navigate('/product/' + prop.product_slug + '?color=' + prop.options_slug) 
       console.log(process.env.REACT_APP_API_URL + '/api/products/' + prop.product_slug + '?color=' + prop.options_slug)}}
     >
-      <Card.Img
+      <Card.Img 
         variant="top" src={process.env.REACT_APP_API_URL + '/' + mainImg}
+        style={{ objectFit: "cover", height: "100%"}}
       />
       <Card.Body style={{}}>
         <Card.Text className='text-center mb-3'>{prop.name}</Card.Text>
-        <Card.Title className='text-center font-weight-bold text-uppercase mb-3'>{prop.product_color as string}</Card.Title>
+        <Card.Title className='text-center fw-bold text-uppercase mb-3'>{prop.product_color as string}</Card.Title>
         <Card.Text className='text-center'>{prop.price + prop.price_increase}</Card.Text>
       </Card.Body>
     </Card>

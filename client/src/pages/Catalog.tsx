@@ -52,7 +52,7 @@ export const Catalog = observer((props: ICatalogProps) => {
 
   return (
     <div>
-      <Header />
+      <Header color='BLACK'/>
       {catsOptions.map(cat => {
         return (
           <div key={cat.id}>

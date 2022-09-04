@@ -26,6 +26,10 @@ export const deleteFromlocalStorage = (id: number) => {
   localStorage.setItem('cart', JSON.stringify(cartData))    
 }
 
+export const clearlocalStorage = () => {
+    localStorage.removeItem('cart')    
+}
+
 export const updatelocalStorage = (id: number, quantity: number) => {
   let cartData: ICart = JSON.parse(localStorage.getItem('cart') as string) || {}
   if (cartData[id]){

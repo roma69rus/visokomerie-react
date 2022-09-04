@@ -26,7 +26,6 @@ export function VMCategory(props: IVMCategoryProps) {
       if (productData.categories.length === 0) {
         const cats = await getAllCategories()
         productData.setCategories(cats)
-        console.log("GET CATS")
       }
     })()
   }, [])

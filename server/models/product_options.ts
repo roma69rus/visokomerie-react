@@ -5,11 +5,14 @@ import {Column, Model, Table, ForeignKey, DataType, CreatedAt, UpdatedAt, Delete
 
 export interface IOptionsInput {
   id?: number;
+  description?: string;
+  option_order?: number;
   product_color: string;
   price_increase: number;
   options_slug: string;
   ProductId: number;
-  po_order?: number
+  po_order?: number;
+  main_page?: boolean
   
 }
 
@@ -27,6 +30,9 @@ export class ProductOptions extends Model<ProductOptions, IOptionsInput> {
 
   @Column({type: DataType.INTEGER, allowNull: false, defaultValue: "0"})
   public price_increase!: number;
+
+  @Column({type: DataType.BOOLEAN, allowNull: false, defaultValue: false})
+  public main_page!: boolean;
 
   @Column({type: DataType.INTEGER})
   public po_order!: number;

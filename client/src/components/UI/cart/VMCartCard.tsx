@@ -1,18 +1,19 @@
 import * as React from 'react';
 
 export interface ICartCardProps {
+  img: string
   name: string;
   price: number;
   color: string;
   quantity: number;
 }
 
-export function CartCard({name, price, color, quantity}: ICartCardProps) {
+export function CartCard({name, price, color, quantity, img}: ICartCardProps) {
   const [q, setQ] = React.useState<number>(quantity)
   
   return (
     <li className='cart__list-item'>
-      <img src='./1_black_palaco.jpg' alt='' width='262' height='306' className='cart__list-img' />
+      <img src={process.env.REACT_APP_API_URL + '/' + img} alt='' width='262' height='306' className='cart__list-img' />
       <div className='cart__list-wrapper'>
         <h3 className='cart__list-heading'>{name}</h3>
         <div className="cart__list-close"></div>

@@ -7,7 +7,7 @@ export interface ISearchProps {
 export function Search (props: ISearchProps) {
   return (
     <div>
-      <Header/>
+      <Header color='BLACK'/>
       Search
     </div>
   );

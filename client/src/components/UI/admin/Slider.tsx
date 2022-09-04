@@ -61,7 +61,7 @@ export function AdmSlider(props: IAdmSliderProps) {
             <Col md={6}>
               <Form>
                 <Form.Check
-                  disabled={slide.id === editedSlider?.id ? false : true}
+                  disabled//={slide.id === editedSlider?.id ? false : true}
                   type="switch"
                   id="custom-switch"
                   label="IsVideo"

@@ -94,6 +94,13 @@ class productService {
     return await ProductOptionsImages.findOne({ where: { id } })
   }
 
+  async getCartOptions(ids: number[]): Promise<any> {
+
+    const options = await ProductOptions.findAll({ include: [{model: Product}, {model: ProductOptionsImages, where: {main_image: true}}], where: { id: { [Op.in]: ids } } })
+
+    return options
+  }
+
   async deleteImage(id: number): Promise<any> {
     return await ProductOptionsImages.destroy({ where: { id } })
   }
@@ -140,7 +147,7 @@ class productService {
     return products
   }
 
-  async getAllOptions(ProductId: number, limit: number, page: number): Promise<any> {
+  async getAllOptions(ProductId: number, limit: number, page: number, main_page: boolean): Promise<any> {
 
     limit = limit || 100;   //по умолчанию 100 элементов на странице
     page = page || 1        //по умолчанию первая страница
@@ -156,17 +163,30 @@ class productService {
         },
       })
     } else {
-      return await ProductOptions.findAll({
-        include: {
-          all: true,
-          nested: true
-        },
-        limit,
-        offset
-      })
+      if (main_page){
+        return await ProductOptions.findAll({
+          include: [{
+            all: true,
+            nested: true
+          }],
+          where: {main_page},
+          limit,
+          offset
+        })
+      } else{
+        return await ProductOptions.findAll({
+          include: {
+            all: true,
+            nested: true
+          },
+          limit,
+          offset
+        })
+      }
+      
     }
   }
-  
+
   async getOneOption(OptionId: number): Promise<any> {
 
     return await ProductOptions.findOne({

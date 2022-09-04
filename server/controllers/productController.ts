@@ -60,10 +60,10 @@ class ProductController {
 
   async createOptions(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
-      const { product_color, options_slug, ProductId } = req.body
+      const { product_color, options_slug, ProductId, description, option_order, } = req.body
       const { images } = req.files as any;
 
-      const createdOptions = await productService.createOptions({ product_color, options_slug, price_increase: 0, ProductId }, images)
+      const createdOptions = await productService.createOptions({ product_color, options_slug, price_increase: 0, ProductId, description, option_order }, images)
 
       return res.json(createdOptions)
     } catch (error) {
@@ -72,14 +72,14 @@ class ProductController {
   }
   async updateOptions(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
-      const { product_color, options_slug, ProductId, price_increase, po_order, id }:IOptionsInput = req.body
+      const { product_color, options_slug, ProductId, price_increase, po_order, id, main_page, description, option_order }:IOptionsInput = req.body
       let images : any;
       if (req.files) {
         images = req?.files?.images as any;
       }
        
 
-      const createdOptions = await productService.updateOptions({ product_color, options_slug, price_increase: price_increase, ProductId, po_order: po_order, id }, images)
+      const createdOptions = await productService.updateOptions({ product_color, options_slug, price_increase: price_increase, ProductId, po_order: po_order, id, main_page, description, option_order  }, images)
 
       return res.json(createdOptions)
     } catch (error) {
@@ -94,6 +94,29 @@ class ProductController {
       const createdOptions = await productService.deleteOptions(Number(id))
 
       return res.json(createdOptions)
+    } catch (error) {
+      next(ApiError.badRequest(`Ошибка при обновлении ProductOptions/ProductOptionImages: ${error}`))
+    }
+  }
+  async getCartOptions(req: Request, res: Response, next: NextFunction): Promise<any> {
+    try {
+      const { ids }:any = req.body
+
+      let idsArray:number[] = []
+
+      for (var key in ids) {
+        if (ids.hasOwnProperty(key)) {
+          const value = Number(ids[key]);
+          idsArray.push(value)
+        }
+      }
+
+      console.log("idsArray", idsArray, typeof(idsArray), Array.isArray(idsArray))
+       
+
+      const cartOptions = await productService.getCartOptions(idsArray)
+
+      return res.json(cartOptions)
     } catch (error) {
       next(ApiError.badRequest(`Ошибка при обновлении ProductOptions/ProductOptionImages: ${error}`))
     }
@@ -151,10 +174,10 @@ class ProductController {
 
   async getAllOptions(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
-      const { page, limit } = req.query;
+      const { page, limit, main_page } = req.query;
       let { ProductId } = req.params;
 
-      const products = await productService.getAllOptions(Number(ProductId), Number(limit), Number(page))
+      const products = await productService.getAllOptions(Number(ProductId), Number(limit), Number(page), Boolean(main_page))
       // const products = await productService.getAllProductsWithOptions()
 
       return res.json(products)

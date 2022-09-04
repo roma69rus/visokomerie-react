@@ -11,6 +11,7 @@ export interface IProductOptions {
   ProductId: number;
   Product?: IProduct;
   ProductOptionsImages: Array<IProductOptionsImages>;
+  main_page: boolean;
   createdAt?: string;
   updatedAt?: string;
   deletedAt?: string | null;
